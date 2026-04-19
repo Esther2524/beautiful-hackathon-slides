@@ -37,12 +37,29 @@ If no: proceed to Step 2 and ask for the minimum.
 
 ### Step 2: Blocker questions (ask only what's missing from Step 1)
 
-These are the ONLY things needed to generate Phase 2 previews:
+These are the ONLY things needed to generate Phase 2 previews. Ask all 5 together in one message. Each question is a natural-language prompt with an example to guide the user's answer format.
 
-1. **Hackathon event name + video time limit** (e.g., "HackTheNorth 2024, 3-minute submission"). Time limit is critical because it determines narration length later.
-2. **Product name + one-sentence description** (what it is + who it's for). Needed so previews show real content, not placeholder text.
-3. **Audience level** — technical judges, mixed, or non-technical? This decides whether to include an architecture slide and how much technical depth to show.
-4. **Any existing visual identity?** (brand colors, logo, mascot). Optional — if they don't have any, Phase 2 picks palettes from scratch. If they do, previews should try to honor it.
+> **Q1**: What hackathon is this for, and how long is the demo video?
+> *(e.g., "HackTheNorth 2024, 3-minute video limit")*
+>
+> **Q2**: What's your product called, and who does it help do what?
+> *(e.g., "FitClimb — helps climbers track their training progress and route difficulty")*
+>
+> **Q3**: Who will be watching — mostly technical people, non-technical, or a mix?
+> *(e.g., "technical judges from the engineering org" or "mixed — some engineers, some PMs")*
+>
+> **Q4**: Do you already have any brand colors, a logo, or a mascot? If not, no worries — I'll design from scratch.
+> *(e.g., "we have a green leaf logo" or "nothing yet")*
+>
+> **Q5**: After watching your demo, what do you most want judges to walk away thinking?
+> *(e.g., "these people are technically strong" or "this really solves a pain point" or "wow that design is clean")*
+
+**How to use the answers**:
+- Q1: Time limit determines narration word budget in Phase 6.
+- Q2: Product name and description populate preview content so slides show real text, not placeholders. If the user struggles with this, help them — rephrase what they said into a one-liner and confirm.
+- Q3: Audience level decides whether to include an architecture slide and how much technical depth to show.
+- Q4: Existing visual identity informs color choices in Phase 2 previews. No identity = full creative freedom.
+- Q5: The "impression" answer does NOT affect which style previews are shown (Phase 2 always shows all 5 presets). It affects Phase 3 — which slides get detailed treatment and which get simplified. Map the user's free-text answer to the closest category: technically impressive / beautifully designed / solves a real problem / creative and bold.
 
 ### Explicitly defer these to later phases (do NOT ask now)
 
@@ -121,13 +138,24 @@ If the user volunteers a color preference ("I want it pink!"), capture it but tr
 4. **Pick an emoji logo** (if the chosen style supports it — see "Emoji Logo Generation" in `slide-patterns.md`). Select one primary emoji that captures the project theme, and 2-3 supporting emojis for scene cards / feature icons. Avoid startup clichés (💡🚀⭐).
 5. **Ask for team info now** (deferred from Phase 1): "I'm about to add the Team slide — what are the team members' names? Any handles, aliases, or roles to include?" Keep this brief.
 6. **Ask about live demo recordings** (deferred from Phase 1): "Will there be live demo recordings inserted? If yes, what's being shown (console, web UI, device, animation)? I'll leave placeholder slots for them." This decides how many `video-placeholder` slides to include.
-7. Build a single-file HTML deck (`<project-name>-deck.html`) with:
+7. **Apply the user's Impression choice** from Phase 1 to decide slide emphasis:
+
+   | Impression | Emphasize (more detail, more time) | Simplify (lighter treatment) |
+   |------------|-------------------------------------|-------------------------------|
+   | Technically impressive | Architecture diagram, Flow diagram, technical pipeline | Problem/empathy slide |
+   | Beautifully designed | Title animation, Use Case visuals, typography/spacing precision | Architecture detail |
+   | Solves a real problem | Problem slide (core focus), Use Case narrative, mascot/character | Technical pipeline depth |
+   | Creative / Bold | Unconventional layouts, strong animations, bold color usage | Traditional architecture format |
+
+   These are guidelines, not hard rules. Blend based on the user's project context.
+
+8. Build a single-file HTML deck (`<project-name>-deck.html`) with:
    - Core patterns: title, problem/content, solution, use-case, architecture, video-placeholder, team-closing
    - Optional patterns based on the project: composable visual, day-in-life timeline, flow diagram, etc.
-8. Use the base scaffolding from `assets/style-preview-template.html` for navigation, animations, and viewport handling.
-9. In per-component CSS, use `var(--font-display)` / `var(--font-body)` — never hardcode font names like `font-family: 'Fraunces'`, or fonts won't swap when the preset changes.
-10. Aim for **10–14 slides** total. Default: 12.
-11. **Run the Font Sanity Check** from `style-presets.md` before handing off to the user. Verify: @import URL matches font-family declarations, weight 700+ is imported, italic variants are imported if used.
+9. Use the base scaffolding from `assets/style-preview-template.html` for navigation, animations, and viewport handling.
+10. In per-component CSS, use `var(--font-display)` / `var(--font-body)` — never hardcode font names like `font-family: 'Fraunces'`, or fonts won't swap when the preset changes.
+11. Aim for **10–14 slides** total. Default: 12.
+12. **Run the Font Sanity Check** from `style-presets.md` before handing off to the user. Verify: @import URL matches font-family declarations, weight 700+ is imported, italic variants are imported if used.
 12. Open the deck in the browser so the user can review.
 
 **Output**: A complete HTML deck.

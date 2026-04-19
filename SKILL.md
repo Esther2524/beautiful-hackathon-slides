@@ -36,7 +36,7 @@ This skill is built around three principles of AI collaboration. They apply to e
 
 ## Workflow Overview
 
-This skill follows an 8-phase workflow. Full details: `references/workflow-phases.md`.
+This skill follows a 9-phase workflow (Phase 0 through 8). Full details: `references/workflow-phases.md`.
 
 ```
 Phase 0 → Discover: User describes their hackathon project

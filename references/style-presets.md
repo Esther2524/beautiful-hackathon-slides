@@ -328,6 +328,19 @@ Given a user who says "I like pink":
 - **Don't** force a color into a preset where it doesn't fit (pink in Electric Dusk looks tacky; preserve archetype integrity).
 - **Don't** hedge with "slightly pink-tinged" variations across all 5 — commit fully to preference in some, fully contrast in others.
 
+### Impression choice and preset fit
+
+The user's "first impression" answer from Phase 1 can also nudge which presets feel most natural (though all 5 are still generated):
+
+| Impression | Most natural presets | Why |
+|------------|---------------------|-----|
+| Technically impressive | Cyber Terminal, Electric Dusk | Technical aesthetics signal depth |
+| Beautifully designed | Warm Editorial, Pastel Chapters | Design-forward aesthetics signal craft |
+| Solves a real problem | Warm Editorial, Pastel Chapters | Warm, human-centered aesthetics signal empathy |
+| Creative / Bold | Citrus Punch, Pastel Chapters | Energetic/unconventional aesthetics signal creativity |
+
+This does NOT restrict the previews — all 5 are always shown. But if the user is torn between two presets in Phase 2, this mapping can help you recommend one.
+
 ### When explaining to the user
 
 After generating the 5 previews, be transparent:

@@ -25,36 +25,46 @@ See [`references/ai-collaboration-principles.md`](references/ai-collaboration-pr
 
 ## Installation
 
-### Claude Code — Local (recommended for personal use)
-
-Copy the skill into your Claude Code skills directory:
+Clone the skill into your Claude Code skills directory:
 
 ```bash
 git clone https://github.com/Esther2524/beautiful-hackathon-slides.git ~/.claude/skills/beautiful-hackathon-slides
 ```
 
-Then invoke it in Claude Code by describing what you want:
+Plugin Marketplace publishing is coming soon. For now, use the git clone method above.
+
+## Usage
+
+Once installed, there are two ways to invoke the skill:
+
+**Option 1: Just describe what you need (recommended)**
+
+Claude will automatically detect that this skill applies based on your request:
 
 ```
 "help me make a hackathon pitch deck"
+"I need slides for my hackathon demo video"
+"create a presentation for our hackathon submission"
 ```
 
-### Claude Code — Plugin Marketplace (coming soon)
+**Option 2: Invoke directly with slash command**
 
-Marketplace publishing is planned. For now, use the git clone method above.
+If Claude doesn't automatically pick up the skill, you can invoke it explicitly:
 
-## Quick Start
+```
+/beautiful-hackathon-slides
+```
 
-Once installed, just describe your hackathon project in natural language. The skill will:
+Either way, the skill will walk you through the full workflow:
 
-1. Ask targeted questions about your event, product, team, and demo format
-2. Generate 5 visually distinct style previews (3 sample slides each)
-3. Build a complete deck in your chosen style
+1. Ask a few targeted questions about your project
+2. Generate 5 visually distinct style previews for you to choose from
+3. Build a complete HTML deck in your chosen style
 4. Write a `PLAN.md` to preserve context
 5. Help you iterate specific slides
 6. Generate an AI narration script
-7. Guide you through integrating recorded demo videos
-8. Package deliverables for the hackathon's submission format
+7. Guide you through inserting recorded demo videos
+8. Package deliverables for submission
 
 ## Repository Structure
 

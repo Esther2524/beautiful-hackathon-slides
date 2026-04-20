@@ -39,12 +39,9 @@ Then invoke it in Claude Code by describing what you want:
 "help me make a hackathon pitch deck"
 ```
 
-### Claude Code — Plugin Marketplace (if published)
+### Claude Code — Plugin Marketplace (coming soon)
 
-```bash
-/plugin marketplace add Esther2524/beautiful-hackathon-slides
-/plugin install beautiful-hackathon-slides@beautiful-hackathon-slides
-```
+Marketplace publishing is planned. For now, use the git clone method above.
 
 ## Quick Start
 

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Candidate A2 · Studio Electric</title>
+<!--
+  CANDIDATE A2 (replacement for Activist Bold)
+  Distinctive moves: deep ink near-black background, electric magenta or blue
+  saturated headline, Barlow Black mega-display, IBM Plex Mono micro labels,
+  modular sharp blocks, design-studio energy (not hacker, not corporate).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0E0E12;
+    --bg-2: #18181F;
+    --paper: #F1EFE8;
+    --magenta: #E945D6;
+    --electric: #5B6BFF;
+    --ink: #060608;
+    --line: rgba(241,239,232,.18);
+    --f-display: 'Barlow', sans-serif;
+    --f-body: 'Barlow', sans-serif;
+    --f-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family: var(--f-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+  .topbar {
+    grid-column: 1 / -1;
+    padding: 22px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--paper);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+  .topbar .dot {
+    width: 8px; height: 8px;
+    background: var(--magenta);
+    display: inline-block;
+    margin-right: 8px;
+    box-shadow: 0 0 12px var(--magenta);
+  }
+  .topbar .vol { color: rgba(241,239,232,.5); }
+  .left {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 50px 36px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--electric);
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 900;
+    font-size: clamp(62px, 9vw, 130px);
+    line-height: .85;
+    letter-spacing: -.025em;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+  h1 .magenta { color: var(--magenta); }
+  h1 .electric { color: var(--electric); }
+  .right {
+    grid-column: 2;
+    grid-row: 2;
+    background: var(--magenta);
+    color: var(--ink);
+    padding: 50px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .right::after {
+    content: "";
+    position: absolute;
+    bottom: -20%;
+    right: -20%;
+    width: 60%;
+    height: 60%;
+    background: var(--electric);
+    border-radius: 50%;
+    opacity: .9;
+  }
+  .right .quote {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+    z-index: 2;
+    position: relative;
+  }
+  .right .attr {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    z-index: 2;
+    position: relative;
+  }
+  .footer {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--line);
+    padding: 18px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--paper);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .footer .pill-row { display: flex; gap: 10px; }
+  .footer .pill {
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="topbar">
+    <span><span class="dot"></span>{ProductName} Studio</span>
+    <span class="vol">— vol. 01 / hackathon ed. —</span>
+    <span>2026</span>
+  </div>
+
+  <div class="left">
+    <div class="label">— Cover —</div>
+    <h1>Build it<br/><span class="magenta">like</span><br/><span class="electric">a studio.</span></h1>
+  </div>
+
+  <div class="right">
+    <div class="quote">"Software is a designed object. Stop pretending it's just code."</div>
+    <div class="attr">— the team / 2026</div>
+  </div>
+
+  <div class="footer">
+    <span>p. 01</span>
+    <div class="pill-row">
+      <span class="pill">design-led</span>
+      <span class="pill">opinionated</span>
+      <span class="pill">crafted</span>
+    </div>
+    <span>★ Hackathon</span>
+  </div>
+</section>
+</body>
+</html>

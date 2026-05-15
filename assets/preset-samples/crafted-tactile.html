@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Crafted Tactile · sample</title>
+<!--
+  PRESET: Crafted Tactile
+  USE AS: visual reference for Claude when generating Phase 2 previews of this preset.
+  Distinctive moves to copy: scotch tape + pinned post-its on a paper background,
+  handwritten Caveat overlaid on geometric Space Grotesk, slight rotations on
+  decorative elements, raw paper / craft texture, soft drop shadows.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #F1ECE0;
+    --paper-shadow: rgba(60, 50, 30, .08);
+    --ink: #2A2620;
+    --ink-soft: #6B6357;
+    --tape: #FFE89A;
+    --pin: #C8392E;
+    --accent: #2D5C3E;
+    --post-it: #FFEAA8;
+    --f-display: 'Space Grotesk', sans-serif;
+    --f-hand: 'Caveat', cursive;
+    --f-mono: 'DM Mono', ui-monospace, monospace;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-display);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      radial-gradient(rgba(60,50,30,.04) 1px, transparent 1px),
+      radial-gradient(rgba(60,50,30,.03) 1px, transparent 1px);
+    background-size: 4px 4px, 9px 9px;
+    background-position: 0 0, 2px 2px;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    position: relative;
+    padding: 80px 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pin-corner {
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--pin);
+    box-shadow: 0 3px 6px rgba(0,0,0,.25), inset -2px -2px 3px rgba(0,0,0,.2);
+  }
+  .meta {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+  }
+  .meta .stamp {
+    border: 1px solid var(--ink-soft);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transform: rotate(-1.5deg);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: clamp(56px, 8vw, 108px);
+    font-weight: 700;
+    line-height: .95;
+    letter-spacing: -.025em;
+    color: var(--ink);
+    max-width: 16ch;
+  }
+  .scribble {
+    font-family: var(--f-hand);
+    font-weight: 600;
+    color: var(--accent);
+    font-size: clamp(36px, 4.2vw, 56px);
+    transform: rotate(-2deg);
+    display: inline-block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .post-it {
+    position: absolute;
+    background: var(--post-it);
+    padding: 16px 18px;
+    width: 180px;
+    box-shadow: 4px 6px 14px rgba(0,0,0,.18);
+    transform: rotate(3deg);
+    font-family: var(--f-hand);
+    font-size: 19px;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .post-it::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 30%;
+    width: 60px;
+    height: 18px;
+    background: rgba(255,232,154,.85);
+    border-radius: 2px;
+    transform: rotate(-4deg);
+    box-shadow: 1px 2px 3px rgba(0,0,0,.1);
+  }
+  .post-it.right { right: 60px; top: 130px; }
+  .post-it.left  { left: 70px;  bottom: 130px; transform: rotate(-5deg); }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+  .pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink);
+    border: 1px dashed var(--ink-soft);
+    padding: 6px 12px;
+    border-radius: 999px;
+    letter-spacing: .04em;
+    background: rgba(255,255,255,.4);
+  }
+  .badge {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 8px 14px;
+    border-radius: 4px;
+    letter-spacing: .1em;
+    transform: rotate(1deg);
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="pin-corner"></div>
+
+  <div class="meta">
+    <span>vol. 01 · {ProductName}</span>
+    <span class="stamp">draft · 2026</span>
+  </div>
+
+  <div>
+    <span class="scribble">a tactile thing,</span>
+    <h1>Built by hand,<br/>for the people who care.</h1>
+  </div>
+
+  <div class="post-it right">small enough to fit your bag, sturdy enough to last a decade.</div>
+  <div class="post-it left">handmade ≠ slow. it just means thoughtful.</div>
+
+  <div class="footer-row">
+    <div class="pills">
+      <span class="pill">🛠 craft</span>
+      <span class="pill">📐 measure twice</span>
+      <span class="pill">🪵 raw</span>
+    </div>
+    <div class="badge">🏆 Hackathon Demo</div>
+  </div>
+</section>
+</body>
+</html>

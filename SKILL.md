@@ -41,7 +41,7 @@ This skill follows a 9-phase workflow (Phase 0 through 8). Full details: `refere
 ```
 Phase 0 → Discover: User describes their hackathon project
 Phase 1 → Clarify: Ask targeted questions about audience, timing, demos, branding
-Phase 2 → Preview: Generate 5 style options (3 sample slides each)
+Phase 2 → Preview: Curate 5 of 13 style presets based on Q1-Q5, generate previews
 Phase 3 → Build: Generate complete deck in chosen style
 Phase 4 → Document: Create PLAN.md to store context (recommended)
 Phase 5 → Iterate: Refine specific slides based on feedback
@@ -57,7 +57,8 @@ When executing this skill, load the relevant reference docs:
 | Phase | Reference |
 |-------|-----------|
 | Phase 1 clarifying questions | `references/workflow-phases.md` |
-| Phase 2 style presets | `references/style-presets.md` |
+| Phase 2 style presets (13-preset pool) | `references/style-presets.md` |
+| Phase 2 visual references for 8 of the 13 presets | `assets/preset-samples/*.html` |
 | Phase 2/3 slide patterns | `references/slide-patterns.md` |
 | Phase 3 HTML scaffolding | `assets/style-preview-template.html` |
 | Phase 3 step 5b — animated demo slide | `references/live-demo-archetypes.md` + `assets/live-demo-template.html` |
@@ -104,3 +105,4 @@ Most slide generators converge on generic aesthetics (Inter font, white backgrou
 - **Don't generate the PLAN.md before the user picks a style.** Plan generation comes AFTER style selection — that way the plan captures the actual chosen direction, not speculation.
 - **Always match the narration script length to the user's stated video length.** 3 minutes ≠ 5 minutes. Word count matters.
 - **For animated demo slides (Q6 = b/d), recommend 2–3 archetypes — never all 6.** Six options trigger paralysis; two grounded recommendations + a "want a different one?" escape hatch lets the user decide fast. See `references/live-demo-archetypes.md` decision tree.
+- **In Phase 2, never show all 13 presets — curate 5.** Use the 5-2-2-1 algorithm in `workflow-phases.md` Phase 2 (2 impression-aligned + 2 theme-aligned + 1 wildcard). Showing 13 options paralyzes; 5 curated based on Q1-Q5 lands. For 8 of the 13 presets, ALWAYS read `assets/preset-samples/{slug}.html` before generating the preview — they have decorative elements (post-its, sticker badges, scanlines, grid columns) that text descriptions alone can't fully convey.

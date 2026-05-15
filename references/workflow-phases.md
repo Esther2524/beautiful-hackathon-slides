@@ -100,32 +100,56 @@ If the user volunteers a color preference ("I want it pink!"), capture it but tr
 
 ## Phase 2 — Preview (Show, Don't Tell)
 
-**Goal**: Let the user pick an aesthetic direction from visual options.
+**Goal**: Let the user pick an aesthetic direction from visual options. The skill maintains a **13-preset pool** (see `references/style-presets.md`); Phase 2 **curates 5** of those 13 based on the user's Phase 1 answers, then generates previews of the curated 5.
 
 **Action**:
-1. Load `references/style-presets.md` and `references/slide-patterns.md` (the latter for the Emoji Logo Generation section).
-2. **Review the "Color Priority" section** in `style-presets.md`. If the user stated any color preferences in Phase 1, plan to honor them in only 2-3 previews and deliberately explore alternatives in the other 2-3. Users don't know what they want until they see it — never generate 5 variations of the same stated preference.
+
+1. Load `references/style-presets.md` (full 13-preset pool + Color Priority + Impression mapping) and `references/slide-patterns.md` (the latter for the Emoji Logo Generation section).
+
+2. **Curate 5 presets from the pool of 13** using the **5-2-2-1 algorithm** below. This is the most important step in Phase 2 — get this right and previews land; get it wrong and the user has to scroll through 5 options that all feel off.
+
+   **The 5-2-2-1 curation algorithm**:
+
+   | Slot | Count | What to pick |
+   |------|-------|--------------|
+   | **Impression-aligned** | **2** | Two presets from the row in `style-presets.md` → "Impression mapping" that matches the user's Q5 answer. E.g., Q5 = "technically impressive" → pick 2 from {Cyber Terminal, Electric Dusk, Studio Electric, Architectural Grid}. |
+   | **Theme-aligned** | **2** | Two presets that fit the *project's inherent theme* — read `style-presets.md` "When to choose it" sections and pick the 2 strongest matches for what the product actually does. |
+   | **Wildcard** | **1** | One preset that *doesn't* obviously fit — to surprise the user. Often the wildcard wins. Pick from a row in the impression mapping the user did NOT answer for. |
+
+   Cross-check the 5 you picked:
+   - **No 2 share the same primary display font** (use the Font Distinctiveness Summary table in `style-presets.md`)
+   - **Cover light + dark** (at least one dark preset, at least one light)
+   - **Cover sans + serif + mono** (the 5 should not all be the same type-class)
+   - **Don't pick both Warm Editorial and Friendly Casual** — they both use Fraunces and will look too close
+
+   If the user volunteered a color preference in Phase 1, layer in **Color Priority** (see `style-presets.md`): of your curated 5, ensure 2 honor the preference where the preset supports it, and 3 deliberately explore alternatives.
+
 3. **Pick an emoji logo** that fits the project theme (see `slide-patterns.md` → "Emoji Logo Generation" for how to choose). Use this emoji consistently across all 5 previews so the user evaluates styles, not logos.
+
 4. Generate 5 HTML preview files, each containing 3 sample slides:
    - **Sample Slide 1**: Title / hero — showcases typography, layout, and tone. Include the emoji logo (in the style-appropriate pattern — hex badge, oversized, bracketed mono, etc.).
    - **Sample Slide 2**: Content slide — the "Problem" or a similar content-rich slide.
    - **Sample Slide 3**: Live demo placeholder — shows how video insertion will look.
-5. **For each preview, apply the preset's exact font block** — the `@import` URL and `:root { --font-* }` CSS variables are **inline in each preset's description** in `style-presets.md`. Copy-paste these verbatim. Do NOT leave the template's default Fraunces+Outfit — that will cause all 5 previews to look identical (the #1 failure mode of this skill).
 
-   **Distinctiveness requirement**: The 5 previews must use 5 different primary display fonts: Fraunces (Warm Editorial), Syne (Cyber Terminal), Bricolage Grotesque (Citrus Punch), Manrope (Electric Dusk), Nunito (Pastel Chapters). If two previews end up with the same primary font, one of them was built wrong.
-6. Use the user's Phase 1 answers to inform each preview's content (e.g., actual product name, real problem statement).
+5. **For each preview, apply the preset's exact font block** — the `@import` URL and `:root { --font-* }` CSS variables are **inline in each preset's description** in `style-presets.md`. Copy-paste these verbatim. Do NOT leave the scaffold's default fonts — that will cause all 5 previews to look identical (the #1 failure mode of this skill).
+
+   **For 8 of the 13 presets** (Crafted Tactile, Studio Electric, Moody Nocturnal, Kawaii Retro, Friendly Casual, Lo-Fi Underground, Bold Poster, Architectural Grid) there is also a **sample HTML reference** at `assets/preset-samples/{preset-slug}.html` showing the preset's distinctive decorative elements. **Read the sample before generating the preview** — copy specific decorative blocks (post-it notes, electric color circles, scanline overlays, grid columns, marginalia, sticker badges) directly from the sample into your preview. The sample shows what the preset's visual signature actually looks like in code — text descriptions alone aren't enough for these more decorative presets.
+
+   **Distinctiveness requirement**: The 5 generated previews must use 5 different primary display fonts (verify against the Font Distinctiveness Summary table in `style-presets.md`). If two previews end up with the same primary font, the curation in step 2 was wrong — go back and re-pick.
+
+6. Use the user's Phase 1 answers to inform each preview's content (actual product name, real problem statement).
 7. Name files `preview-option-1.html` through `preview-option-5.html`.
 8. **Run Font Sanity Check on each preview** before opening (see `style-presets.md`). Each preview's `@import` must match its `font-family` declarations, or the preview will show generic system fonts and fail the "show don't tell" purpose.
 9. Open all 5 in the browser simultaneously so the user can compare.
-10. **When presenting to the user, be transparent about color choices**: if you honored their stated preference in some previews and deliberately contrasted in others, say so. Example: "2 of these lean into your preference for [color], 3 deliberately explore other directions."
+10. **When presenting to the user, be transparent about the curation**: name the 5 presets you picked + WHY each. Example: "From the 13-preset pool, I picked these 5: 2 lean technical (Cyber Terminal, Architectural Grid) since you said 'technically impressive'; 2 are theme-aligned (Electric Dusk for fintech vibe, Studio Electric for design-led feel); 1 wildcard (Lo-Fi Underground) — sometimes the wildcard surprises."
 11. Ask the user which one resonates. Accept mixed feedback ("I like 2 but prefer 4's layout") and offer to combine.
 
-**Critical**: The 5 previews must be **genuinely different** — not safe variations. Cover light/dark, serif/sans/mono, warm/cool, minimal/maximal. Refer to `references/style-presets.md` for the 5 aesthetic directions.
+**Critical**: The 5 generated previews must be **genuinely different** — not safe variations. Cover light/dark, serif/sans/mono, warm/cool, minimal/maximal. With 13 presets to draw from, you have no excuse for delivering 5 lookalikes.
 
 **Escape hatch: if the user rejects all 5**:
-- Do NOT generate 5 new previews from scratch — that's wasteful.
+- Do NOT regenerate 5 new previews from scratch — that's wasteful.
 - Ask specific, diagnostic questions: "What specifically didn't work — the colors? The layout density? The overall feeling? Too bold or too subtle?"
-- Based on answers, generate **2-3 targeted new previews** that address the rejection (e.g., if they said "too cold", generate warmer takes on the presets that lean cool).
+- Based on answers, **re-curate from the 8 presets you didn't show first time**. The 13-preset pool means you almost always have an unshown preset that addresses the rejection. Generate 2-3 targeted new previews from those.
 - Combine elements from previously-liked-but-imperfect options: "You liked #2's typography but #4's color palette — here's a hybrid."
 - If the user still can't decide after the second round, present the 2-3 strongest options and recommend one with reasoning.
 

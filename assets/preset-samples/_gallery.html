@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Preset Samples · Gallery</title>
+<style>
+  body {
+    margin: 0;
+    background: #0a0d14;
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    padding: 40px 32px 80px;
+  }
+  header { max-width: 1400px; margin: 0 auto 32px; }
+  h1 { margin: 0 0 8px; font-size: 26px; }
+  p { color: #94a3b8; margin: 0 0 4px; }
+  .grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .card {
+    background: #11151f;
+    border: 1px solid #1e2433;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .card header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #1e2433;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+  }
+  .card .name { font-weight: 600; }
+  .card .badge {
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    color: #64748b;
+    background: #060912;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #1e2433;
+  }
+  .card iframe {
+    width: 100%;
+    height: 360px;
+    border: none;
+    background: white;
+    display: block;
+  }
+  .card .open {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+    text-decoration: none;
+    border-top: 1px solid #1e2433;
+  }
+  .card .open:hover { color: white; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Preset Samples · 8 new aesthetics for the slides skill</h1>
+  <p>Each tile loads the actual sample HTML in an iframe at 16:9. Click the file name to open standalone.</p>
+  <p style="color:#64748b; font-size:13px;">Each sample is a single-slide reference Claude reads before generating the matching Phase 2 preview.</p>
+</header>
+<div class="grid">
+  <div class="card"><header><span class="name">Crafted Tactile</span> <span class="badge">handmade · paper</span></header>
+    <iframe src="crafted-tactile.html"></iframe>
+    <a href="crafted-tactile.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Architectural Grid</span> <span class="badge">research · cobalt</span></header>
+    <iframe src="architectural-grid.html"></iframe>
+    <a href="architectural-grid.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Studio Electric</span> <span class="badge">design-led · electric</span></header>
+    <iframe src="studio-electric.html"></iframe>
+    <a href="studio-electric.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Moody Nocturnal</span> <span class="badge">dark · sultry</span></header>
+    <iframe src="moody-nocturnal.html"></iframe>
+    <a href="moody-nocturnal.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Kawaii Retro</span> <span class="badge">pixel · pink</span></header>
+    <iframe src="kawaii-retro.html"></iframe>
+    <a href="kawaii-retro.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Friendly Casual</span> <span class="badge">warm · indie</span></header>
+    <iframe src="friendly-casual.html"></iframe>
+    <a href="friendly-casual.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Lo-Fi Underground</span> <span class="badge">zine · acid</span></header>
+    <iframe src="lo-fi-underground.html"></iframe>
+    <a href="lo-fi-underground.html" class="open">↗ open standalone</a></div>
+  <div class="card"><header><span class="name">Bold Poster</span> <span class="badge">manifesto · slab</span></header>
+    <iframe src="bold-poster.html"></iframe>
+    <a href="bold-poster.html" class="open">↗ open standalone</a></div>
+</div>
+</body>
+</html>

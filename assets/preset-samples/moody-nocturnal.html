@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Moody Nocturnal · sample</title>
+<!--
+  PRESET: Moody Nocturnal
+  USE AS: visual reference for Claude when generating Phase 2 previews of this preset.
+  Distinctive moves to copy: pure-black or near-black background, hot-pink DM Serif
+  italic display words, soft cream Inter body, JetBrains Mono small-caps labels with
+  pink hairlines, faint pink hatching grid in background, sultry late-night feel.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #060507;
+    --ink-2: #0F0D11;
+    --paper: #F5EDF1;
+    --pink: #ED3D8C;
+    --pink-2: #FF66A8;
+    --pink-deep: #B81D67;
+    --line: rgba(237,61,140,.32);
+    --mute: rgba(245,237,241,.55);
+    --f-display: 'DM Serif Display', Georgia, serif;
+    --f-body: 'Inter', system-ui, sans-serif;
+    --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--f-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    background: var(--ink);
+    background-image:
+      linear-gradient(135deg, rgba(237,61,140,.06) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, rgba(237,61,140,.04) 0 1px, transparent 1px 14px);
+    position: relative;
+    padding: 70px 90px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+  .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%);
+  }
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+  }
+  .ticker {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--pink-2);
+    text-transform: uppercase;
+    letter-spacing: .28em;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+  .timestamp {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--mute);
+    letter-spacing: .2em;
+  }
+  .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+  }
+  .label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--pink);
+    text-transform: uppercase;
+    letter-spacing: .32em;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .label::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--pink);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: clamp(60px, 8.4vw, 116px);
+    line-height: .98;
+    letter-spacing: -.01em;
+    color: var(--paper);
+    max-width: 14ch;
+    font-weight: 400;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--pink);
+    text-shadow: 0 0 22px rgba(237,61,140,.45);
+  }
+  .sub {
+    margin-top: 28px;
+    font-family: var(--f-body);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--mute);
+    max-width: 50ch;
+    line-height: 1.6;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+  .pill-row { display: flex; gap: 14px; }
+  .pill {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--paper);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    background: var(--ink-2);
+  }
+  .badge {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--pink);
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    border: 1px solid var(--pink);
+    padding: 6px 12px;
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="vignette"></div>
+
+  <div class="top-row">
+    <span class="ticker">▲ {ProductName} · 2:14 a.m.</span>
+    <span class="timestamp">vol. 01 / 12</span>
+  </div>
+
+  <div class="center">
+    <div class="label">Side A</div>
+    <h1>For the people who only think clearly <em>after dark</em>.</h1>
+    <div class="sub">A single-purpose tool for late-night work, late-night reading, and the half-formed ideas that won't survive the morning.</div>
+  </div>
+
+  <div class="footer-row">
+    <div class="pill-row">
+      <span class="pill">solo</span>
+      <span class="pill">offline</span>
+      <span class="pill">no-prompt</span>
+    </div>
+    <span class="badge">★ Hackathon</span>
+  </div>
+</section>
+</body>
+</html>

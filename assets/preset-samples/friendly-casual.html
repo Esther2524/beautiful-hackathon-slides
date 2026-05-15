@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Friendly Casual · sample</title>
+<!--
+  PRESET: Friendly Casual
+  USE AS: visual reference for Claude when generating Phase 2 previews of this preset.
+  Distinctive moves to copy: warm cream / butter background, Fraunces italic display
+  paired with Bricolage Grotesque body, soft warm palette (terracotta + sage + mustard),
+  hand-drawn squiggle accents under headlines, conversational copy ("hey there"),
+  small portrait/emoji characters, rounded soft cards, indie-not-corporate.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #FAF1DF;
+    --paper-2: #F2E5C7;
+    --ink: #2C2317;
+    --ink-soft: #6E5E45;
+    --terracotta: #C56F4F;
+    --sage: #7A8F6A;
+    --mustard: #D9A33C;
+    --pink: #E89BA1;
+    --f-display: 'Fraunces', Georgia, serif;
+    --f-body: 'Bricolage Grotesque', system-ui, sans-serif;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    padding: 70px 84px;
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--terracotta);
+  }
+  .badge {
+    font-family: var(--f-body);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--ink);
+    background: var(--mustard);
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: .05em;
+  }
+  .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 0;
+  }
+  .greeting {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(56px, 8vw, 104px);
+    line-height: .98;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    max-width: 16ch;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--sage);
+  }
+  .squiggle {
+    width: 280px;
+    height: 18px;
+    margin-top: 10px;
+    color: var(--terracotta);
+  }
+  .sub {
+    margin-top: 26px;
+    font-family: var(--f-body);
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    line-height: 1.6;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .characters {
+    display: flex;
+    gap: 8px;
+    font-size: 28px;
+  }
+  .character {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .character:nth-child(2) { background: var(--pink); }
+  .character:nth-child(3) { background: var(--sage); }
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--paper-2);
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="top-row">
+    <div class="brand"><span class="dot"></span> {ProductName}</div>
+    <span class="badge">🌻 Hackathon · 2026</span>
+  </div>
+
+  <div class="center">
+    <span class="greeting">— hey there —</span>
+    <h1>The friendliest place to <em>try things</em> with friends.</h1>
+    <svg class="squiggle" viewBox="0 0 280 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 9 Q 22 -2, 42 9 T 82 9 T 122 9 T 162 9 T 202 9 T 242 9 T 278 9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <p class="sub">Built for small teams, casual collaborators, and anyone who's tired of enterprise software pretending to care.</p>
+  </div>
+
+  <div class="footer-row">
+    <div class="characters">
+      <div class="character">😺</div>
+      <div class="character">🌸</div>
+      <div class="character">🌿</div>
+    </div>
+    <div class="pill-row">
+      <span class="pill">small teams</span>
+      <span class="pill">no setup</span>
+      <span class="pill">made with care</span>
+    </div>
+  </div>
+</section>
+</body>
+</html>

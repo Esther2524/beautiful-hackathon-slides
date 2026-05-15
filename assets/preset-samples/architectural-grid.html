@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Candidate B2 · Architectural Grid</title>
+<!--
+  CANDIDATE B2 (replacement for Scholarly Quiet)
+  Distinctive moves: explicit modular grid (visible faint guides), deep cobalt blue
+  accent on warm off-white, Newsreader serif italic for display, Hanken Grotesk
+  body, DM Mono for index labels and page numbers, small-caps section markers.
+  Pentagram-design-studio energy: refined + structured + visually dense.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #EFE9DA;
+    --paper-2: #E5DFCF;
+    --ink: #14140E;
+    --ink-soft: #5A5A50;
+    --cobalt: #1F3A8A;
+    --cobalt-soft: #4F66B5;
+    --rule: rgba(20,20,14,.15);
+    --f-display: 'Newsreader', Georgia, serif;
+    --f-body: 'Hanken Grotesk', system-ui, sans-serif;
+    --f-mono: 'DM Mono', ui-monospace, monospace;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    position: relative;
+    padding: 36px 44px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 50px 1fr 50px;
+    gap: 16px;
+    overflow: hidden;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: 36px 44px;
+    background-image:
+      linear-gradient(to right, var(--rule) 1px, transparent 1px);
+    background-size: calc((100% + 16px) / 8) 100%;
+    opacity: .4;
+    pointer-events: none;
+  }
+  .topbar {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .topbar .center-label {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--cobalt);
+  }
+  .index-col {
+    grid-column: 1 / 2;
+    grid-row: 2;
+    border-right: 1px solid var(--rule);
+    padding-right: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .index-col .item {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .index-col .item .num {
+    color: var(--cobalt);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  .index-col .item.active {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .body {
+    grid-column: 2 / 7;
+    grid-row: 2;
+    z-index: 2;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--cobalt);
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(50px, 6.6vw, 88px);
+    line-height: 1;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    max-width: 16ch;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cobalt);
+  }
+  .sub {
+    margin-top: 22px;
+    font-family: var(--f-body);
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 48ch;
+    line-height: 1.55;
+  }
+  .meta-col {
+    grid-column: 7 / 9;
+    grid-row: 2;
+    border-left: 1px solid var(--rule);
+    padding-left: 12px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .meta-col .small {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .meta-col .small strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .footer {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="topbar">
+    <span>{ProductName} · A Field Guide</span>
+    <span class="center-label">— issue one —</span>
+    <span>2026 / 01</span>
+  </div>
+
+  <div class="index-col">
+    <div class="item active"><span class="num">i</span>cover</div>
+    <div class="item"><span class="num">ii</span>brief</div>
+    <div class="item"><span class="num">iii</span>method</div>
+    <div class="item"><span class="num">iv</span>artifact</div>
+    <div class="item"><span class="num">v</span>plan</div>
+    <div class="item"><span class="num">vi</span>colophon</div>
+  </div>
+
+  <div class="body">
+    <div class="label">§ i. cover</div>
+    <h1>A small <em>research kit</em> for thinking out loud, on paper.</h1>
+    <p class="sub">Twelve slides, one method, no jargon. Built in a weekend. Documented like it might matter later.</p>
+  </div>
+
+  <div class="meta-col">
+    <div class="small"><strong>filed under</strong>research · design · refs</div>
+    <div class="small"><strong>commissioned</strong>by the team, for hackathon judges</div>
+    <div class="small"><strong>method</strong>field-guide format, modular grid, fixed columns</div>
+  </div>
+
+  <div class="footer">
+    <span>p. 01 / 12</span>
+    <span>section i — cover · field guide</span>
+    <span>★ submitted</span>
+  </div>
+</section>
+</body>
+</html>

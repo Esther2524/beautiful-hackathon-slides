@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
+<title>Kawaii Retro · sample</title>
+<!--
+  PRESET: Kawaii Retro
+  USE AS: visual reference for Claude when generating Phase 2 previews of this preset.
+  Distinctive moves to copy: pink + cyan + butter-yellow color blocking, "old window
+  chrome" title bar with pixelated minimize/maximize buttons, Big Shoulders Display
+  chunky display, Press Start 2P pixel font for tags/labels, JP/EN bilingual flourish
+  (small kana mark), sticker-like rounded badges, scanline overlay.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Albert+Sans:wght@400;500;600;700&family=Press+Start+2P&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #FFB6D9;
+    --pink-deep: #E94B91;
+    --cyan: #B6F0FF;
+    --cyan-deep: #2DBFE8;
+    --butter: #FFE980;
+    --paper: #FFF7FB;
+    --ink: #1F0F2A;
+    --window-grey: #C0C0C0;
+    --window-blue: #000080;
+    --f-display: 'Big Shoulders Display', sans-serif;
+    --f-body: 'Albert Sans', system-ui, sans-serif;
+    --f-pixel: 'Press Start 2P', cursive;
+    --f-jp: 'Noto Sans JP', sans-serif;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    position: relative;
+    background:
+      linear-gradient(135deg, var(--pink) 0%, var(--pink) 35%, var(--cyan) 35%, var(--cyan) 70%, var(--butter) 70%, var(--butter) 100%);
+    overflow: hidden;
+  }
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.04) 0 1px, transparent 1px 4px);
+    pointer-events: none;
+    z-index: 5;
+  }
+  .window {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78%;
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .window-bar {
+    background: var(--window-blue);
+    color: white;
+    padding: 6px 10px;
+    font-family: var(--f-pixel);
+    font-size: 9px;
+    letter-spacing: .08em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .window-bar .controls { display: flex; gap: 4px; }
+  .window-bar .control {
+    width: 14px; height: 14px;
+    background: var(--window-grey);
+    border: 2px solid var(--ink);
+    border-right-color: white;
+    border-bottom-color: white;
+    text-align: center;
+    line-height: 10px;
+    color: var(--ink);
+  }
+  .window-body { padding: 30px 40px 36px; }
+  .kana {
+    font-family: var(--f-jp);
+    font-weight: 700;
+    color: var(--pink-deep);
+    font-size: 16px;
+    letter-spacing: .2em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 900;
+    font-size: clamp(58px, 7.6vw, 100px);
+    line-height: .92;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--cyan-deep);
+  }
+  .sub {
+    margin-top: 18px;
+    font-family: var(--f-body);
+    font-size: 17px;
+    color: var(--ink);
+    max-width: 50ch;
+    line-height: 1.5;
+  }
+  .pill-row { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .pill {
+    font-family: var(--f-pixel);
+    font-size: 8px;
+    color: var(--paper);
+    background: var(--pink-deep);
+    padding: 7px 12px;
+    border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    letter-spacing: .08em;
+    transform: rotate(-1deg);
+  }
+  .pill.cyan { background: var(--cyan-deep); transform: rotate(1deg); }
+  .pill.butter { background: var(--butter); color: var(--ink); transform: rotate(-2deg); }
+  .sticker {
+    position: absolute;
+    bottom: 32px;
+    right: 36px;
+    background: var(--pink-deep);
+    color: var(--paper);
+    font-family: var(--f-pixel);
+    font-size: 9px;
+    padding: 18px 22px;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(-6deg);
+    z-index: 6;
+    letter-spacing: .1em;
+    text-align: center;
+  }
+  .sticker .star {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .corner-mark {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    font-family: var(--f-pixel);
+    font-size: 9px;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 6px 10px;
+    border: 2px solid var(--ink);
+    z-index: 6;
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="scanlines"></div>
+  <div class="corner-mark">{HACK 2026}</div>
+
+  <div class="window">
+    <div class="window-bar">
+      <span>▶ {ProductName}.exe — title slide</span>
+      <div class="controls">
+        <span class="control">_</span>
+        <span class="control">□</span>
+        <span class="control">×</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="kana">トキメキ // tokimeki</div>
+      <h1>For the joy<br/>of building<br/>tiny things.</h1>
+      <p class="sub">A toy you'll use every day, not a tool you'll forget by Friday. Made in 36 hours, designed to last.</p>
+      <div class="pill-row">
+        <span class="pill">cute</span>
+        <span class="pill cyan">fast</span>
+        <span class="pill butter">free</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sticker">
+    <span class="star">★ ★ ★</span>
+    HACKATHON<br/>WINNER ?
+  </div>
+</section>
+</body>
+</html>

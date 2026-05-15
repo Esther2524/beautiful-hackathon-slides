@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Bold Poster · sample</title>
+<!--
+  PRESET: Bold Poster
+  USE AS: visual reference for Claude when generating Phase 2 previews of this preset.
+  Distinctive moves to copy: Shrikhand or Barlow Black mega-headline, Libre Baskerville
+  italic for body emphasis, deep editorial color (oxblood / forest / cobalt) on warm
+  cream OR warm cream type on a deep panel, single-axis composition (everything aligned
+  to a strong vertical), small monospace metadata, manifesto-poster energy.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2EBD9;
+    --ink: #1A1208;
+    --oxblood: #6E1A1A;
+    --cobalt: #1B3A8A;
+    --gold: #C58A2E;
+    --f-display: 'Shrikhand', serif;
+    --f-body: 'Libre Baskerville', Georgia, serif;
+    --f-mono: 'Space Grotesk', system-ui, sans-serif;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    width: min(1100px, 92vw);
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    padding: 60px 80px;
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 14px;
+  }
+  .pub-name {
+    font-family: var(--f-mono);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    color: var(--ink);
+  }
+  .pub-name .accent {
+    background: var(--oxblood);
+    color: var(--paper);
+    padding: 2px 8px;
+    margin-left: 4px;
+  }
+  .vol {
+    text-align: right;
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .center {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 50px;
+    align-items: center;
+    padding: 40px 0;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: clamp(80px, 11.4vw, 168px);
+    line-height: .82;
+    color: var(--oxblood);
+    letter-spacing: -.005em;
+  }
+  h1 .alt {
+    color: var(--cobalt);
+    display: block;
+  }
+  .pull-quote {
+    border-left: 4px solid var(--ink);
+    padding-left: 20px;
+    max-width: 240px;
+  }
+  .pull-quote .label {
+    font-family: var(--f-mono);
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    margin-bottom: 10px;
+  }
+  .pull-quote .quote {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .pull-quote .attr {
+    margin-top: 12px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .footer-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    border-top: 3px solid var(--ink);
+    padding-top: 14px;
+  }
+  .stamp {
+    font-family: var(--f-mono);
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    border: 2px solid var(--ink);
+    padding: 6px 10px;
+    color: var(--ink);
+  }
+  .footer-byline {
+    font-family: var(--f-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    text-align: center;
+  }
+  .badge {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--f-mono);
+    font-weight: 700;
+    font-size: 11px;
+    padding: 8px 14px;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+  }
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="top-row">
+    <div class="pub-name">{ProductName}<span class="accent">no. 1</span></div>
+    <div class="vol">— vol. one —<br/><em>established 2026</em></div>
+  </div>
+
+  <div class="center">
+    <h1>
+      Stop hedging.<br/>
+      <span class="alt">Make the loud bet.</span>
+    </h1>
+
+    <div class="pull-quote">
+      <div class="label">— from the editor —</div>
+      <div class="quote">"Every great hackathon project we've ever shipped was a stupid idea its team committed to anyway."</div>
+      <div class="attr">— the team</div>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <span class="stamp">manifesto</span>
+    <span class="footer-byline">Pinned to the wall, daily — <em>for the next 36 hours</em>.</span>
+    <span class="badge">★ Hackathon 2026</span>
+  </div>
+</section>
+</body>
+</html>

@@ -7,7 +7,7 @@ A collection of workflow, patterns, and principles for building bold pitch decks
 ## What This Does
 
 - **Walks you through a proven 9-phase workflow** — from clarifying questions to final demo video integration
-- **Shows, doesn't tell** — generates 5 visually distinct style previews instead of asking "what font do you want?"
+- **Shows, doesn't tell** — curates 5 of 13 style presets based on your project + audience, then generates visually distinct previews instead of asking "what font do you want?"
 - **Delivers single-file HTML decks** — zero dependencies, opens in any browser, responsive
 - **Reserves explicit slots for live demo recordings** — hackathon decks always need them
 - **Or builds an *animated demo slide* for you** — when the product isn't built yet (or as polish over a screen recording). 6 archetypes to pick from — Split Narrative, Pipeline Walk, Before/After Morph, Dashboard Fill-In, Network Graph, Map Heatbloom. See ["What's new"](#whats-new--animated-demo-slide) below.
@@ -86,7 +86,17 @@ beautiful-hackathon-slides/
     ├── plan-template.md                  ← PLAN.md template
     ├── narration-script-template.md      ← narration script template
     ├── style-preview-template.html       ← HTML scaffolding
-    └── live-demo-template.html           ← 6-archetype scaffolds for animated demos
+    ├── live-demo-template.html           ← 6-archetype scaffolds for animated demos
+    └── preset-samples/                   ← 8 visual references for the added presets
+        ├── _gallery.html                 ← side-by-side iframe gallery (open this first)
+        ├── crafted-tactile.html
+        ├── studio-electric.html
+        ├── moody-nocturnal.html
+        ├── kawaii-retro.html
+        ├── friendly-casual.html
+        ├── lo-fi-underground.html
+        ├── bold-poster.html
+        └── architectural-grid.html
 ```
 
 ## What's New · Animated Demo Slide
@@ -119,9 +129,11 @@ Starter HTML scaffolds for all 6: [`assets/live-demo-template.html`](assets/live
 
 ---
 
-## The 5 Style Presets
+## The 13 Style Presets
 
-Each is an *aesthetic direction*, not a fixed color palette. The skill picks colors to fit your specific project.
+Each is an *aesthetic direction*, not a fixed color palette. The skill picks colors to fit your specific project. Phase 2 picks 5 of these 13 based on your hackathon answers (the 5-2-2-1 curation: 2 match your stated impression, 2 fit your project theme, 1 is a wildcard).
+
+The original 5 (curated and refined for hackathon use):
 
 | Preset | Feel | Best For |
 |--------|------|----------|
@@ -130,6 +142,21 @@ Each is an *aesthetic direction*, not a fixed color palette. The skill picks col
 | **Citrus Punch** | Light, bold sans, energetic | B2C products, creative tools, gaming |
 | **Electric Dusk** | Dark navy, clean sans, sleek | Enterprise, fintech, data platforms |
 | **Pastel Chapters** | Light split-duotone, storytelling | Education, wellness, character narratives |
+
+8 added (with sample HTML references in [`assets/preset-samples/`](assets/preset-samples/)):
+
+| Preset | Feel | Best For |
+|--------|------|----------|
+| **Crafted Tactile** | Warm paper, post-its, handmade | Hardware, indie, "human" products |
+| **Studio Electric** | Dark + electric magenta, design-led | Design tools, generative AI, media |
+| **Moody Nocturnal** | Black + hot pink, intimate / sultry | Late-night tools, journaling, music |
+| **Kawaii Retro** | Pastel + win95 + pixel, joyful retro | Gaming, AI companions, consumer playful |
+| **Friendly Casual** | Warm cream, indie, conversational | Community, hospitality, food, wellness |
+| **Lo-Fi Underground** | Photocopy zine + acid yellow, scrappy | Indie, art, music, "made in 36 hours" |
+| **Bold Poster** | Cream + Shrikhand mega, manifesto | Single-axis pitches, publications |
+| **Architectural Grid** | Cream + cobalt, visible 8-col grid | Research, knowledge, design-doc tools |
+
+Each of the 8 added presets has a sample HTML in `assets/preset-samples/` that Claude reads as a visual reference before generating the corresponding Phase 2 preview — text descriptions alone aren't enough for the more decorative ones (post-its, sticker badges, scanlines, 8-col grids).
 
 ## License
 

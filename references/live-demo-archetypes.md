@@ -1,6 +1,6 @@
 # Live Demo Archetypes
 
-A "**fake live demo**" slide is a single-slide animation that visually walks the judge through how the user's product works — using fake-but-accurate data and choreographed motion. It's the alternative to embedding a recorded video, useful when:
+A "**animated demo**" slide is a single-slide animation that visually walks the judge through how the user's product works — using illustrative data and choreographed motion. It's the alternative to embedding a recorded video, useful when:
 
 - The product isn't built yet (or backend is flaky and could crash on stage)
 - The recorded video is the backup, and the animation is the primary proof
@@ -9,20 +9,20 @@ A "**fake live demo**" slide is a single-slide animation that visually walks the
 
 This doc covers the **six animation archetypes** Claude can build, the **three questions** to ask the user per archetype to fill it with their content, and the **building-block recipes** for the "custom" escape hatch.
 
-For the *recorded-video* path, see `video-integration.md`. The two modes are usually **mutually exclusive on the same slide** — a hackathon slide is either an embedded video or a fake animation, not both. (Rare exception: animation as fallback behind a "show animation instead" toggle on the same slide; see "Both modes on one slide" at the bottom.)
+For the *recorded-video* path, see `video-integration.md`. The two modes are usually **mutually exclusive on the same slide** — a hackathon slide is either an embedded video or an animated demo, not both. (Rare exception: animation as fallback behind a "show animation instead" toggle on the same slide; see "Both modes on one slide" at the bottom.)
 
 ---
 
 ## How this fits the workflow
 
-The Phase 1 questionnaire includes **Q6**: *"Live demo plan? (a) embed your recorded video, (b) Claude builds a fake-data animation now, (c) both — animation as backup, (d) skip."*
+The Phase 1 questionnaire includes **Q6**: *"Live demo plan? (a) embed your recorded video, (b) Claude builds an animated demo now, (c) both — animation as backup, (d) skip."*
 
 If the user picks **(a)** or **(d)**, Claude does not touch this doc — Phase 3 just inserts a video-placeholder slide (or no demo slide at all).
 
 If the user picks **(b)** or **(c)**, Phase 3 adds a step:
 
 ```
-Phase 3 step 5b — Fake Live Demo Slide construction
+Phase 3 step 5b — Animated Demo Slide construction
   ↓
   i.   Recommend 2–3 archetypes from the 6 below, with one-line "why for your product"
   ↓
@@ -35,7 +35,7 @@ Phase 3 step 5b — Fake Live Demo Slide construction
   v.   Slide is added to the deck at the natural "How it works / Demo" position
 ```
 
-After Phase 3, Phase 5 iteration treats the live-demo slide like any other slide — see "Iterating on a fake demo slide" at the bottom of this doc.
+After Phase 3, Phase 5 iteration treats the live-demo slide like any other slide — see "Iterating on an animated demo slide" at the bottom of this doc.
 
 ---
 
@@ -105,7 +105,7 @@ After Phase 3, Phase 5 iteration treats the live-demo slide like any other slide
 **Layout**: Fixed grid (typically 2×2 or 3×2) of **dashboard tiles**. Each tile starts empty/skeletal, then "**fills in**" with content during the animation: a counter ticks up, bars rise from baseline, a sparkline draws itself, a status pill flips from gray to green.
 
 **Motion language**:
-- `@keyframes counterTick` cycles a tile's number through 4–5 values to fake the rollup (use CSS `content` with `steps()` timing for crisp ticking)
+- `@keyframes counterTick` cycles a tile's number through 4–5 values to simulate the rollup (use CSS `content` with `steps()` timing for crisp ticking)
 - `@keyframes barRise` grows bar heights from a baseline value with bottom-anchored `transform-origin`
 - `@keyframes sparkPath` animates `stroke-dashoffset` on an SVG path so it draws itself left-to-right
 - Tiles can be staggered with `animation-delay` so the dashboard "**fills row by row**" instead of all at once
@@ -161,7 +161,7 @@ After Phase 3, Phase 5 iteration treats the live-demo slide like any other slide
 
 ## Style preset coupling
 
-Every fake demo slide must visually match the deck's chosen style preset. The archetype is **structural**; the styling is **inherited from the preset**.
+Every animated demo slide must visually match the deck's chosen style preset. The archetype is **structural**; the styling is **inherited from the preset**.
 
 When generating the slide HTML:
 
@@ -229,7 +229,7 @@ The whole flow from "user picks archetype" to "demo plays in browser" should be 
 
 ---
 
-## Iterating on a fake demo slide (Phase 5 patterns)
+## Iterating on an animated demo slide (Phase 5 patterns)
 
 | User says | What to change |
 |---|---|
@@ -259,7 +259,7 @@ Don't volunteer this option in Phase 1 — let the user ask for it explicitly. I
 
 ## Anti-patterns
 
-- **Don't generate a fake demo slide if the user picked option (a)** in Phase 1. They have a video; respect it.
+- **Don't generate an animated demo slide if the user picked option (a)** in Phase 1. They have a video; respect it.
 - **Don't use generic animation easings** (`linear`, `ease`). Use `cubic-bezier(.2,.8,.2,1)` or `ease-out` for "things landing"; `linear` is acceptable only for infinite loops where motion shouldn't accent.
 - **Don't dump all 6 archetypes on the user**. Recommend 2–3 with one-line "why for your product"; let them pick.
 - **Don't forget to inherit the deck's CSS variables**. Re-declaring fonts/colors inside the demo slide is the #1 way to make the slide visually clash with the rest of the deck.

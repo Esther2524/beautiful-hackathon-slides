@@ -308,13 +308,13 @@ Keep the "this is deployed" badge appropriate to the context — e.g., "Live on 
 ```
 See `video-integration.md` for details.
 
-**Alternative — fake live demo**: If the user picked Q6 = (b) in Phase 1, this slide is replaced by a Fake Live Demo Slide (see pattern 7b below) instead of a placeholder.
+**Alternative — animated demo**: If the user picked Q6 = (b) in Phase 1, this slide is replaced by an Animated Demo Slide (see pattern 7b below) instead of a placeholder.
 
 ---
 
-### 7b. Fake Live Demo Slide (animated, no recording required)
+### 7b. Animated Demo Slide (animated, no recording required)
 
-**When to use**: User picked Q6 = (b) or (d) in Phase 1 — Claude builds an animated fake-data demo slide showing how the product works, instead of (or alongside) an embedded recording.
+**When to use**: User picked Q6 = (b) or (d) in Phase 1 — Claude builds an animated demo slide showing how the product works (with illustrative data), instead of (or alongside) an embedded recording.
 
 **Source of truth**: This pattern is fully documented in `references/live-demo-archetypes.md`, with 6 archetypes and their elicitation questions. The starter HTML lives in `assets/live-demo-template.html`.
 

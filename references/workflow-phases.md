@@ -56,7 +56,7 @@ These are the ONLY things needed to generate Phase 2 previews. Ask all 5 togethe
 >
 > **Q6**: Live demo plan? Pick one:
 > *(a) I'll embed my own recorded video — Claude leaves a placeholder slide for it.*
-> *(b) Claude builds a fake-data animation showing how my product works — useful when the product isn't built yet, or as polish over a screen recording.*
+> *(b) Claude builds an animated demo showing how my product works — useful when the product isn't built yet, or as polish over a screen recording.*
 > *(c) Skip — no demo slide.*
 > *(rare: (d) both — animation as backup behind a toggle on the same slide.)*
 
@@ -66,7 +66,7 @@ These are the ONLY things needed to generate Phase 2 previews. Ask all 5 togethe
 - Q3: Audience level decides whether to include an architecture slide and how much technical depth to show.
 - Q4: Existing visual identity informs color choices in Phase 2 previews. No identity = full creative freedom.
 - Q5: The "impression" answer does NOT affect which style previews are shown (Phase 2 always shows all 5 presets). It affects Phase 3 — which slides get detailed treatment and which get simplified. Map the user's free-text answer to the closest category: technically impressive / beautifully designed / solves a real problem / creative and bold.
-- Q6: Determines whether Phase 3 inserts a video-placeholder slide (a/d), a fake-animation slide (b/d), neither (c). For (b) and (d), Phase 3 runs a short follow-up — see "Phase 3 step 5b" below — to pick an archetype and elicit the demo's content. The animation work happens in Phase 3, not now.
+- Q6: Determines whether Phase 3 inserts a video-placeholder slide (a/d), an animated demo slide (b/d), neither (c). For (b) and (d), Phase 3 runs a short follow-up — see "Phase 3 step 5b" below — to pick an archetype and elicit the demo's content. The animation work happens in Phase 3, not now.
 
 ### Explicitly defer these to later phases (do NOT ask now)
 
@@ -152,9 +152,9 @@ If the user volunteers a color preference ("I want it pink!"), capture it but tr
 
    **If Q6 = (c) — skip**: Don't insert a demo slide. Move on.
 
-   **If Q6 = (b) or (d) — Claude-built fake animation**: Run **step 5b** below before continuing.
+   **If Q6 = (b) or (d) — Claude-built animated demo**: Run **step 5b** below before continuing.
 
-**5b. Fake Live Demo Slide construction** (only if Q6 = b or d)
+**5b. Animated Demo Slide construction** (only if Q6 = b or d)
 
 Load `references/live-demo-archetypes.md` and use `assets/live-demo-template.html` as the scaffold. Then:
 
@@ -241,7 +241,7 @@ After step 5b finishes (or if Q6 was a/c and step 5b was skipped), continue with
    - "Text overlapping with next column" → add `white-space: nowrap` or split columns
    - "Colors feel off" → update CSS variables
    - "This slide has too much text" → rewrite with shorter phrasing + visuals
-   - For fake-live-demo slide adjustments (timing, looping, label edits, archetype swap): see "Iterating on a fake demo slide" in `references/live-demo-archetypes.md`
+   - For animated-demo slide adjustments (timing, looping, label edits, archetype swap): see "Iterating on an animated demo slide" in `references/live-demo-archetypes.md`
 3. After each edit, remind the user to refresh the browser.
 4. **Update PLAN.md on "significant changes"**. Significant = any of these:
    - Slide added, removed, or reordered

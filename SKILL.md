@@ -60,7 +60,7 @@ When executing this skill, load the relevant reference docs:
 | Phase 2 style presets | `references/style-presets.md` |
 | Phase 2/3 slide patterns | `references/slide-patterns.md` |
 | Phase 3 HTML scaffolding | `assets/style-preview-template.html` |
-| Phase 3 step 5b — fake live demo slide | `references/live-demo-archetypes.md` + `assets/live-demo-template.html` |
+| Phase 3 step 5b — animated demo slide | `references/live-demo-archetypes.md` + `assets/live-demo-template.html` |
 | Phase 4 plan.md generation | `assets/plan-template.md` |
 | Phase 5 iteration patterns | `references/iteration-patterns.md` |
 | Phase 6 script generation | `assets/narration-script-template.md` |
@@ -93,7 +93,7 @@ Most slide generators converge on generic aesthetics (Inter font, white backgrou
 - Commit to **one** aesthetic direction (not hedge with "safe" choices)
 - Use **distinctive typography** (not Inter, not Roboto, not Arial)
 - Include **character and narrative** when possible (mascots, day-in-the-life, use cases)
-- Reserve space for **live demo video** integration (hackathon demos always have one) — OR build a **fake-data animated demo slide** when the user has no recording yet (see `references/live-demo-archetypes.md`)
+- Reserve space for **live demo video** integration (hackathon demos always have one) — OR build an **animated demo slide** when the user has no recording yet (see `references/live-demo-archetypes.md`)
 - Provide an **AI narration script** (most hackathon submissions use AI voice, not human voiceover)
 
 ## Important Behaviors
@@ -103,4 +103,4 @@ Most slide generators converge on generic aesthetics (Inter font, white backgrou
 - **Don't use emojis in user-facing output unless the user requests them.** But emojis ARE appropriate inside slide content (as visual elements), since the user is explicitly asking for visually rich slides.
 - **Don't generate the PLAN.md before the user picks a style.** Plan generation comes AFTER style selection — that way the plan captures the actual chosen direction, not speculation.
 - **Always match the narration script length to the user's stated video length.** 3 minutes ≠ 5 minutes. Word count matters.
-- **For fake live demo slides (Q6 = b/d), recommend 2–3 archetypes — never all 6.** Six options trigger paralysis; two grounded recommendations + a "want a different one?" escape hatch lets the user decide fast. See `references/live-demo-archetypes.md` decision tree.
+- **For animated demo slides (Q6 = b/d), recommend 2–3 archetypes — never all 6.** Six options trigger paralysis; two grounded recommendations + a "want a different one?" escape hatch lets the user decide fast. See `references/live-demo-archetypes.md` decision tree.

@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Fake Live Demo · 6-archetype scaffolding</title>
+
+<!--
+  ============================================================================
+  HOW TO USE THIS FILE
+  ============================================================================
+
+  This is the asset/template for building "fake live demo" slides. Each
+  <section class="demo-slide"> below is one full-size archetype scaffold
+  (16:9 proportion) with the animation already wired up.
+
+  When generating a deck slide:
+
+  1. Pick the archetype the user chose (after running through the 3
+     elicitation questions in references/live-demo-archetypes.md).
+
+  2. Copy the chosen <section class="demo-slide demo-{ARCHETYPE}">...</section>
+     verbatim into the user's deck HTML file.
+
+  3. Replace the placeholder labels marked /* DATA */ with the user's actual
+     content from the elicitation answers.
+
+  4. The :root CSS variables at the top should be REMOVED when copying into
+     a deck — the deck's own :root variables (from style-presets.md) take
+     over. The fallbacks here only exist so this template renders standalone.
+
+  5. Per-style coloring guidance for each archetype is in
+     references/live-demo-archetypes.md → "Style preset coupling" table.
+
+  This file is a STARTING POINT, not a final answer. Adapt freely.
+  ============================================================================
+-->
+
+<style>
+  /* ---- DEFAULTS only — when embedded in a deck, the deck's :root wins ---- */
+  :root {
+    --font-display: 'JetBrains Mono', ui-monospace, monospace;
+    --font-body: system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* color vocabulary used by all 6 archetypes */
+    --bg: #0b0f1a;
+    --bg-pane: #060912;
+    --fg: #e2e8f0;
+    --fg-muted: #94a3b8;
+    --fg-faint: #64748b;
+    --border: rgba(51,65,85,.6);
+    --border-strong: rgba(71,85,105,.8);
+
+    --accent-1: #a78bfa;   /* primary — chat / center node / hero */
+    --accent-2: #22d3ee;   /* secondary — clean state / child node */
+    --accent-3: #f87171;   /* warning — messy / quarantined */
+    --accent-4: #f59e0b;   /* attention — packet / heatpoint */
+    --accent-5: #34d399;   /* success — final reveal */
+  }
+
+  /* ---- generic page chrome (this is the preview wrapper, not part of the slide) ---- */
+  body {
+    margin: 0;
+    background: #050811;
+    color: var(--fg);
+    font-family: var(--font-body);
+  }
+  .preview-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 96px;
+  }
+  .preview-header {
+    margin-bottom: 32px;
+  }
+  .preview-header h1 {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .preview-header p {
+    color: var(--fg-muted);
+    max-width: 60ch;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .archetype-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--fg-muted);
+    margin: 48px 0 12px;
+  }
+
+  /* ---- THE SLIDE FRAME — 16:9, the actual demo container ---- */
+  .demo-slide {
+    aspect-ratio: 16 / 9;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    color: var(--fg);
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(148,163,184,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* ---- shared building blocks ---- */
+  .glow-1 { box-shadow: 0 0 30px -8px var(--accent-1); }
+  .glow-2 { box-shadow: 0 0 30px -8px var(--accent-2); }
+  .glow-3 { box-shadow: 0 0 30px -8px var(--accent-3); }
+  .glow-4 { box-shadow: 0 0 30px -8px var(--accent-4); }
+  .glow-5 { box-shadow: 0 0 30px -8px var(--accent-5); }
+
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  .blink { animation: blink 1s steps(1) infinite; }
+
+  @keyframes flow { to { stroke-dashoffset: -20; } }
+  .flow-line { stroke-dasharray: 4 3; animation: flow 1.2s linear infinite; }
+
+  /* ===========================================================================
+     ARCHETYPE 1 · SPLIT NARRATIVE
+     =========================================================================== */
+  .demo-split { display: grid; grid-template-columns: 38% 1fr; height: 100%; }
+  .demo-split .pane-chat {
+    background: var(--bg-pane);
+    border-right: 1px solid var(--border);
+    padding: 18px 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .demo-split .chat-header {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--fg-faint);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  .demo-split .msg { font-size: 13px; line-height: 1.45; opacity: 0; }
+  .demo-split .msg-user { color: var(--accent-5); font-family: var(--font-mono); font-size: 12px; }
+  .demo-split .msg-agent { color: var(--fg); }
+  .demo-split .msg-tool { color: var(--fg-faint); font-family: var(--font-mono); font-size: 10px; padding-left: 16px; }
+  .demo-split .msg-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--accent-1);
+    margin-bottom: 2px;
+  }
+
+  .demo-split .pane-viz {
+    position: relative;
+    overflow: hidden;
+  }
+  .demo-split .viz-header {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    right: 18px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--fg-faint);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    z-index: 2;
+  }
+  .demo-split .stage {
+    position: absolute;
+    transition: all 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  .demo-split #ds-mono {
+    left: 50%; top: 35%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 180px;
+    background: rgba(167,139,250,.1);
+    border: 1px solid var(--accent-1);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .demo-split #ds-mono.split {
+    transform: translate(-50%, -50%) scale(.5);
+    opacity: 0;
+  }
+  .demo-split #ds-left, .demo-split #ds-right {
+    top: 60%;
+    transform: translate(-50%, -50%) scale(.4);
+    opacity: 0;
+    width: 150px;
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .demo-split #ds-left  { left: 28%; background: rgba(34,211,238,.1); border: 1px solid var(--accent-2); }
+  .demo-split #ds-right { left: 72%; background: rgba(248,113,113,.1); border: 1px solid var(--accent-3); }
+  .demo-split.step-2 #ds-left, .demo-split.step-2 #ds-right {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  .demo-split .stage-title { font-family: var(--font-mono); font-size: 11px; margin-bottom: 8px; }
+  .demo-split .stage-line { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); line-height: 1.5; }
+
+  .demo-split .reveal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .6s;
+    pointer-events: none;
+  }
+  .demo-split.step-3 .reveal { opacity: 1; }
+  .demo-split .reveal-card {
+    background: rgba(11,15,26,.92);
+    border: 1px solid var(--accent-5);
+    border-radius: 14px;
+    padding: 24px 28px;
+    backdrop-filter: blur(8px);
+  }
+  .demo-split .reveal-card h3 {
+    margin: 0 0 12px;
+    font-family: var(--font-display);
+    color: var(--accent-5);
+    font-size: 18px;
+  }
+  .demo-split .reveal-card ul { margin: 0; padding-left: 16px; font-size: 11px; color: var(--fg-muted); line-height: 1.7; font-family: var(--font-mono); }
+
+  /* ===========================================================================
+     ARCHETYPE 2 · PIPELINE WALK
+     =========================================================================== */
+  .demo-pipeline {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 48px 40px;
+    position: relative;
+  }
+  .demo-pipeline .track {
+    position: relative;
+    height: 80px;
+    margin-bottom: 24px;
+  }
+  .demo-pipeline .rail {
+    position: absolute;
+    inset: 50% 0 auto 0;
+    height: 2px;
+    background: var(--border-strong);
+    transform: translateY(-50%);
+  }
+  .demo-pipeline .stages {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    align-items: center;
+  }
+  .demo-pipeline .stage-card {
+    height: 60px;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    background: rgba(15,23,42,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+  @keyframes stageActive {
+    0%, 100% { background: rgba(15,23,42,.6); border-color: var(--border-strong); color: var(--fg-muted); }
+    50%      { background: rgba(34,211,238,.15); border-color: var(--accent-2); color: var(--accent-2); box-shadow: 0 0 20px -4px var(--accent-2); }
+  }
+  .demo-pipeline .s-1 { animation: stageActive 12s linear infinite; }
+  .demo-pipeline .s-2 { animation: stageActive 12s linear infinite -2.4s; }
+  .demo-pipeline .s-3 { animation: stageActive 12s linear infinite -4.8s; }
+  .demo-pipeline .s-4 { animation: stageActive 12s linear infinite -7.2s; }
+  .demo-pipeline .s-5 { animation: stageActive 12s linear infinite -9.6s; }
+
+  @keyframes packetWalk {
+    0%   { left: 8%;  }
+    20%  { left: 24%; }
+    40%  { left: 40%; }
+    60%  { left: 56%; }
+    80%  { left: 72%; }
+    100% { left: 88%; }
+  }
+  .demo-pipeline .packet {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-4);
+    box-shadow: 0 0 14px var(--accent-4);
+    animation: packetWalk 12s linear infinite;
+  }
+
+  .demo-pipeline .labels {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .demo-pipeline .labels span {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--fg-faint);
+  }
+  .demo-pipeline .output-card {
+    margin: 0 auto;
+    width: fit-content;
+    background: rgba(52,211,153,.1);
+    border: 1px solid var(--accent-5);
+    border-radius: 10px;
+    padding: 14px 24px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent-5);
+  }
+  .demo-pipeline .output-card .label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--fg-faint);
+    margin-bottom: 4px;
+  }
+
+  /* ===========================================================================
+     ARCHETYPE 3 · BEFORE / AFTER MORPH
+     =========================================================================== */
+  .demo-morph {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+  .demo-morph .morph-pane {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .demo-morph .pane-before { border-right: 1px solid var(--border); }
+  .demo-morph .pane-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: 8px;
+  }
+  .demo-morph .pane-before .pane-label { color: var(--accent-3); }
+  .demo-morph .pane-after  .pane-label { color: var(--accent-5); }
+
+  @keyframes morphSlide {
+    0%, 25%  { transform: translateX(0); opacity: 1; }
+    55%      { transform: translateX(50%) scale(.85); opacity: .4; }
+    80%, 100%{ transform: translateX(110%) scale(1); opacity: .15; }
+  }
+  .demo-morph .item {
+    background: rgba(248,113,113,.12);
+    border: 1px solid var(--accent-3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-3);
+    animation: morphSlide 8s ease-in-out infinite;
+  }
+  .demo-morph .item-1 { animation-delay: 0s; }
+  .demo-morph .item-2 { animation-delay: -.6s; }
+  .demo-morph .item-3 { animation-delay: -1.2s; }
+
+  @keyframes cleanGlow {
+    0%, 50% { opacity: 0; transform: translateY(8px); }
+    80%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  .demo-morph .clean-item {
+    background: rgba(52,211,153,.12);
+    border: 1px solid var(--accent-5);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-5);
+    animation: cleanGlow 8s ease-in-out infinite;
+  }
+  .demo-morph .clean-item-1 { animation-delay: -.4s; }
+  .demo-morph .clean-item-2 { animation-delay: -.2s; }
+  .demo-morph .clean-item-3 { animation-delay: 0s; }
+  .demo-morph .pane-after .badge {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-5);
+    align-self: flex-end;
+    animation: cleanGlow 8s ease-in-out infinite .4s;
+  }
+
+  /* ===========================================================================
+     ARCHETYPE 4 · DASHBOARD FILL-IN
+     =========================================================================== */
+  .demo-dash {
+    height: 100%;
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+  }
+  .demo-dash .tile {
+    background: rgba(15,23,42,.7);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .demo-dash .tile-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--fg-faint);
+  }
+
+  @keyframes counterTick {
+    0%   { content: "0"; }
+    20%  { content: "37"; }
+    40%  { content: "84"; }
+    60%  { content: "126"; }
+    80%, 100% { content: "147"; }
+  }
+  .demo-dash .counter::before {
+    content: "0";
+    animation: counterTick 6s steps(1) infinite;
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--accent-5);
+    text-shadow: 0 0 20px rgba(52,211,153,.4);
+  }
+
+  @keyframes barRise {
+    0%   { height: 4px; opacity: .3; }
+    25%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
+  .demo-dash .bars { display: flex; gap: 5px; align-items: flex-end; height: 80px; }
+  .demo-dash .bar {
+    flex: 1;
+    background: var(--accent-1);
+    border-radius: 3px 3px 0 0;
+    animation: barRise 6s cubic-bezier(.2,.8,.2,1) infinite;
+    transform-origin: bottom;
+  }
+
+  @keyframes sparkPath {
+    0%   { stroke-dashoffset: 200; }
+    50%, 100% { stroke-dashoffset: 0; }
+  }
+  .demo-dash .spark { stroke-dasharray: 200; animation: sparkPath 6s ease-out infinite; }
+
+  .demo-dash .tile-wide { grid-column: span 2; }
+
+  @keyframes pillFlip {
+    0%, 30%  { background: rgba(100,116,139,.2); color: var(--fg-faint); }
+    50%, 100% { background: rgba(52,211,153,.2); color: var(--accent-5); }
+  }
+  .demo-dash .pill {
+    align-self: flex-start;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    animation: pillFlip 6s steps(1) infinite;
+  }
+
+  /* ===========================================================================
+     ARCHETYPE 5 · NETWORK GRAPH GROW
+     =========================================================================== */
+  .demo-network {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+  }
+  .demo-network svg { width: 100%; height: 100%; max-width: 700px; }
+  @keyframes nodePopL1 {
+    0%, 8%   { transform: scale(0); opacity: 0; }
+    20%, 100%{ transform: scale(1); opacity: 1; }
+  }
+  @keyframes nodePopL2 {
+    0%, 22%  { transform: scale(0); opacity: 0; }
+    35%, 100%{ transform: scale(1); opacity: 1; }
+  }
+  @keyframes nodePopL3 {
+    0%, 42%  { transform: scale(0); opacity: 0; }
+    55%, 100%{ transform: scale(1); opacity: 1; }
+  }
+  .demo-network .n-l1 { transform-origin: center; transform-box: fill-box; animation: nodePopL1 8s ease-out infinite; }
+  .demo-network .n-l2 { transform-origin: center; transform-box: fill-box; animation: nodePopL2 8s ease-out infinite; }
+  .demo-network .n-l3 { transform-origin: center; transform-box: fill-box; animation: nodePopL3 8s ease-out infinite; }
+  @keyframes lineGrow {
+    0%, 18%  { stroke-dashoffset: 100; }
+    32%, 100%{ stroke-dashoffset: 0; }
+  }
+  @keyframes lineGrow2 {
+    0%, 38%  { stroke-dashoffset: 100; }
+    52%, 100%{ stroke-dashoffset: 0; }
+  }
+  .demo-network .l-l1 { stroke-dasharray: 100; animation: lineGrow 8s ease-out infinite; }
+  .demo-network .l-l2 { stroke-dasharray: 100; animation: lineGrow2 8s ease-out infinite; }
+  .demo-network .label { font-family: var(--font-mono); font-size: 10px; }
+
+  /* ===========================================================================
+     ARCHETYPE 6 · MAP HEATBLOOM
+     =========================================================================== */
+  .demo-map {
+    height: 100%;
+    padding: 24px;
+  }
+  .demo-map svg { width: 100%; height: 100%; }
+  @keyframes bloom {
+    0%   { transform: scale(0); opacity: 0; }
+    15%  { transform: scale(1.3); opacity: .9; }
+    30%, 100% { transform: scale(1); opacity: .9; }
+  }
+  .demo-map .heat { transform-origin: center; transform-box: fill-box; animation: bloom 8s ease-out infinite; }
+  .demo-map .label { font-family: var(--font-mono); font-size: 11px; }
+
+  /* ===========================================================================
+     SHARED STATUS BAR (footer of any demo slide that wants sponsor pills)
+     =========================================================================== */
+  .status-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 18px;
+    border-top: 1px solid var(--border);
+    background: rgba(11,15,26,.7);
+    backdrop-filter: blur(6px);
+    display: flex;
+    gap: 20px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--fg-faint);
+  }
+  .status-bar .pill { display: flex; align-items: center; gap: 6px; }
+  .status-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--fg-faint); }
+  .status-bar .dot-active { background: var(--accent-5); box-shadow: 0 0 8px var(--accent-5); }
+</style>
+</head>
+<body class="bg-grid">
+
+<div class="preview-wrapper">
+
+  <header class="preview-header">
+    <h1>Fake Live Demo · 6-Archetype Scaffolding</h1>
+    <p>
+      Each section below is one full-size archetype slide (16:9), animation already wired.
+      To use: copy the <code>&lt;section class="demo-slide demo-{ARCHETYPE}"&gt;</code> block into
+      a deck and replace the placeholder labels (marked <code>/* DATA */</code> in the source)
+      with content from the user's elicitation answers.
+      Style coloring inherits from the deck's <code>:root</code> variables;
+      the defaults at the top of this file's <code>&lt;style&gt;</code> block are only for standalone preview.
+    </p>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 01 · SPLIT NARRATIVE                                         -->
+  <!-- ============================================================ -->
+  <div class="archetype-label">01 · split narrative · best for conversational / agentic products</div>
+  <section class="demo-slide demo-split bg-grid" data-archetype="split">
+    <aside class="pane-chat">
+      <div class="chat-header">
+        <span>● agent.session</span>
+        <span>● ● ●</span>
+      </div>
+      <div id="split-msgs" style="display:flex; flex-direction:column; gap:10px; flex:1; overflow:hidden;"></div>
+    </aside>
+    <section class="pane-viz">
+      <div class="viz-header">
+        <span>system state</span>
+        <span id="split-phase">monorepo · pre-handoff</span>
+      </div>
+      <div class="stage" id="ds-mono">
+        <div class="stage-title" style="color: var(--accent-1);">/* DATA */ shopify-store/</div>
+        <div class="stage-line">├ src/routes/</div>
+        <div class="stage-line">├ src/lib/config.ts <span style="color:var(--accent-3);">⚠ 5 secrets</span></div>
+        <div class="stage-line">└ src/components/</div>
+      </div>
+      <div class="stage" id="ds-left">
+        <div class="stage-title" style="color: var(--accent-2);">/* DATA */ store-frontend/</div>
+        <div class="stage-line">├ src/routes/</div>
+        <div class="stage-line">└ src/lib/mocks.ts</div>
+      </div>
+      <div class="stage" id="ds-right">
+        <div class="stage-title" style="color: var(--accent-3);">/* DATA */ store-backend/</div>
+        <div class="stage-line">├ src/lib/stripe.ts</div>
+        <div class="stage-line">└ .env <span style="color: var(--accent-5);">✓ locked</span></div>
+      </div>
+      <div class="reveal">
+        <div class="reveal-card glow-5">
+          <h3>/* DATA */ Workspace ready</h3>
+          <ul>
+            <li>5 secrets removed from source</li>
+            <li>front-end / back-end split</li>
+            <li>contractor brief written</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 02 · PIPELINE WALK                                           -->
+  <!-- ============================================================ -->
+  <div class="archetype-label">02 · pipeline walk · best for multi-stage data transformers</div>
+  <section class="demo-slide demo-pipeline bg-grid">
+    <div class="track">
+      <div class="rail"></div>
+      <div class="stages">
+        <div class="stage-card s-1">/* DATA */ ingest</div>
+        <div class="stage-card s-2">/* DATA */ parse</div>
+        <div class="stage-card s-3">/* DATA */ embed</div>
+        <div class="stage-card s-4">/* DATA */ rank</div>
+        <div class="stage-card s-5">/* DATA */ serve</div>
+      </div>
+      <div class="packet"></div>
+    </div>
+    <div class="labels">
+      <span>raw doc</span>
+      <span>tokens</span>
+      <span>vec</span>
+      <span>top-k</span>
+      <span>response</span>
+    </div>
+    <div class="output-card glow-5">
+      <div class="label">output</div>
+      <div>/* DATA */ p95 latency · 180ms</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 03 · BEFORE / AFTER MORPH                                    -->
+  <!-- ============================================================ -->
+  <div class="archetype-label">03 · before/after morph · best for cleanup / refactor / migration</div>
+  <section class="demo-slide demo-morph bg-grid">
+    <div class="morph-pane pane-before">
+      <div class="pane-label">before · /* DATA */ messy state</div>
+      <div class="item item-1">/* DATA */ api_key=sk_live_…</div>
+      <div class="item item-2">/* DATA */ db.pwd="123"</div>
+      <div class="item item-3">/* DATA */ aws.key=AKIA…</div>
+    </div>
+    <div class="morph-pane pane-after">
+      <div class="pane-label">after · /* DATA */ clean state</div>
+      <div class="clean-item clean-item-1">/* DATA */ env.API_KEY</div>
+      <div class="clean-item clean-item-2">/* DATA */ env.DB_PWD</div>
+      <div class="clean-item clean-item-3">/* DATA */ env.AWS_KEY</div>
+      <div class="badge">✓ /* DATA */ 0 secrets in source</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 04 · DASHBOARD FILL-IN                                       -->
+  <!-- ============================================================ -->
+  <div class="archetype-label">04 · dashboard fill-in · best for analytics / monitoring / insights</div>
+  <section class="demo-slide demo-dash bg-grid">
+    <div class="tile">
+      <div class="tile-label">/* DATA */ active users</div>
+      <div class="counter"></div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">/* DATA */ requests · 24h</div>
+      <div class="bars">
+        <div class="bar" style="height:55%; animation-delay:0s"></div>
+        <div class="bar" style="height:30%; animation-delay:-.4s"></div>
+        <div class="bar" style="height:80%; animation-delay:-.8s"></div>
+        <div class="bar" style="height:45%; animation-delay:-1.2s"></div>
+        <div class="bar" style="height:65%; animation-delay:-1.6s"></div>
+        <div class="bar" style="height:75%; animation-delay:-2s"></div>
+      </div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">/* DATA */ status</div>
+      <div class="pill">healthy</div>
+    </div>
+    <div class="tile tile-wide">
+      <div class="tile-label">/* DATA */ p95 latency</div>
+      <svg viewBox="0 0 200 50" style="width:100%; height:60px;">
+        <path d="M0 32 L25 24 L50 36 L75 18 L100 28 L125 12 L150 22 L175 8 L200 14"
+              fill="none" stroke="var(--accent-2)" stroke-width="2" class="spark"/>
+      </svg>
+    </div>
+    <div class="tile">
+      <div class="tile-label">/* DATA */ error rate</div>
+      <div style="font-family:var(--font-display); font-size:32px; font-weight:700; color:var(--accent-5);">0.04<span style="font-size:14px; color:var(--fg-faint);">%</span></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 05 · NETWORK GRAPH GROW                                      -->
+  <!-- ============================================================ -->
+  <div class="archetype-label">05 · network graph · best for graph / multi-agent / social</div>
+  <section class="demo-slide demo-network bg-grid">
+    <svg viewBox="0 0 600 360">
+      <!-- L1 → L2 lines -->
+      <line x1="300" y1="180" x2="160" y2="100" stroke="var(--accent-1)" stroke-width="1.5" class="l-l1" opacity=".6"/>
+      <line x1="300" y1="180" x2="440" y2="100" stroke="var(--accent-1)" stroke-width="1.5" class="l-l1" opacity=".6"/>
+      <line x1="300" y1="180" x2="160" y2="280" stroke="var(--accent-1)" stroke-width="1.5" class="l-l1" opacity=".6"/>
+      <line x1="300" y1="180" x2="440" y2="280" stroke="var(--accent-1)" stroke-width="1.5" class="l-l1" opacity=".6"/>
+
+      <!-- L2 → L3 lines -->
+      <line x1="160" y1="100" x2="80"  y2="50"  stroke="var(--accent-2)" stroke-width="1" class="l-l2" opacity=".6"/>
+      <line x1="440" y1="100" x2="520" y2="40"  stroke="var(--accent-2)" stroke-width="1" class="l-l2" opacity=".6"/>
+      <line x1="160" y1="280" x2="60"  y2="320" stroke="var(--accent-2)" stroke-width="1" class="l-l2" opacity=".6"/>
+      <line x1="440" y1="280" x2="540" y2="320" stroke="var(--accent-2)" stroke-width="1" class="l-l2" opacity=".6"/>
+
+      <!-- L1 center node -->
+      <circle cx="300" cy="180" r="22" fill="var(--accent-1)" class="n-l1" />
+      <text x="300" y="184" text-anchor="middle" fill="white" class="label" style="font-size:11px;">/* DATA */</text>
+      <text x="300" y="220" text-anchor="middle" fill="var(--fg-muted)" class="label">center</text>
+
+      <!-- L2 child nodes -->
+      <circle cx="160" cy="100" r="14" fill="var(--accent-1)" opacity=".7" class="n-l2" />
+      <circle cx="440" cy="100" r="14" fill="var(--accent-1)" opacity=".7" class="n-l2" />
+      <circle cx="160" cy="280" r="14" fill="var(--accent-1)" opacity=".7" class="n-l2" />
+      <circle cx="440" cy="280" r="14" fill="var(--accent-1)" opacity=".7" class="n-l2" />
+      <text x="160" y="80"  text-anchor="middle" fill="var(--fg-muted)" class="label">/* DATA */</text>
+      <text x="440" y="80"  text-anchor="middle" fill="var(--fg-muted)" class="label">/* DATA */</text>
+      <text x="160" y="312" text-anchor="middle" fill="var(--fg-muted)" class="label">/* DATA */</text>
+      <text x="440" y="312" text-anchor="middle" fill="var(--fg-muted)" class="label">/* DATA */</text>
+
+      <!-- L3 grandchild nodes -->
+      <circle cx="80"  cy="50"  r="7" fill="var(--accent-2)" class="n-l3" />
+      <circle cx="520" cy="40"  r="7" fill="var(--accent-2)" class="n-l3" />
+      <circle cx="60"  cy="320" r="7" fill="var(--accent-2)" class="n-l3" />
+      <circle cx="540" cy="320" r="7" fill="var(--accent-2)" class="n-l3" />
+    </svg>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 06 · MAP HEATBLOOM                                           -->
+  <!-- ============================================================ -->
+  <div class="archetype-label">06 · map heatbloom · best for geographic / logistics / global rollout</div>
+  <section class="demo-slide demo-map bg-grid">
+    <svg viewBox="0 0 600 340">
+      <!-- stylized map outline -->
+      <path d="M40,200 Q120,120 200,150 Q300,180 380,120 Q480,60 560,120 L560,300 L40,300 Z"
+            fill="rgba(15,23,42,.5)" stroke="rgba(71,85,105,.5)" stroke-width="1"/>
+
+      <!-- city 1 -->
+      <g class="heat" style="animation-delay: 0s">
+        <circle cx="120" cy="200" r="28" fill="rgba(245,158,11,.25)"/>
+        <circle cx="120" cy="200" r="9" fill="var(--accent-4)"/>
+      </g>
+      <text x="140" y="206" fill="var(--accent-4)" class="label">/* DATA */ SF · 1.2k</text>
+
+      <!-- city 2 -->
+      <g class="heat" style="animation-delay: -1.5s">
+        <circle cx="280" cy="170" r="32" fill="rgba(248,113,113,.25)"/>
+        <circle cx="280" cy="170" r="9" fill="var(--accent-3)"/>
+      </g>
+      <text x="300" y="176" fill="var(--accent-3)" class="label">/* DATA */ NYC · 3.4k</text>
+
+      <!-- city 3 -->
+      <g class="heat" style="animation-delay: -3s">
+        <circle cx="420" cy="130" r="32" fill="rgba(167,139,250,.25)"/>
+        <circle cx="420" cy="130" r="9" fill="var(--accent-1)"/>
+      </g>
+      <text x="440" y="136" fill="var(--accent-1)" class="label">/* DATA */ LDN · 800</text>
+
+      <!-- city 4 -->
+      <g class="heat" style="animation-delay: -4.5s">
+        <circle cx="510" cy="220" r="24" fill="rgba(34,211,238,.25)"/>
+        <circle cx="510" cy="220" r="8" fill="var(--accent-2)"/>
+      </g>
+      <text x="455" y="248" fill="var(--accent-2)" class="label">/* DATA */ TYO · 2.1k</text>
+    </svg>
+  </section>
+
+</div>
+
+<script>
+  // ============================================================
+  // SPLIT NARRATIVE — choreography
+  // ============================================================
+  (() => {
+    const slide = document.querySelector('.demo-split');
+    const msgsEl = document.getElementById('split-msgs');
+    const phaseEl = document.getElementById('split-phase');
+
+    const TURN = [
+      { type: 'user',  text: '/* DATA */ hand off the front-end to Sarah', delay: 600 },
+      { type: 'agent', text: 'scanning your repo… 5 secrets in <code style="color:var(--accent-3)">src/lib/config.ts</code>.', delay: 1200 },
+      { type: 'tool',  text: 'tool · indexed 85 files', delay: 600 },
+      { type: 'agent', text: 'splitting into <code style="color:var(--accent-2)">store-frontend</code> + <code style="color:var(--accent-3)">store-backend</code>.', delay: 1100, action: () => { slide.classList.add('step-2'); phaseEl.textContent = 'split · isolating secrets'; } },
+      { type: 'tool',  text: 'tool · refactor applied · 5 secrets removed', delay: 800 },
+      { type: 'agent', text: 'workspace ready. brief written.', delay: 1000, action: () => { slide.classList.add('step-3'); phaseEl.textContent = 'handoff · complete'; } },
+    ];
+
+    function addMsg({ type, text }) {
+      const wrap = document.createElement('div');
+      wrap.className = 'msg msg-' + type;
+      if (type === 'user') {
+        wrap.innerHTML = `<div class="msg-label" style="color: var(--accent-5); text-align:right;">› user</div><div style="text-align:right;">${text}</div>`;
+      } else if (type === 'agent') {
+        wrap.innerHTML = `<div class="msg-label">agent</div><div>${text}</div>`;
+      } else {
+        wrap.innerHTML = text;
+      }
+      msgsEl.appendChild(wrap);
+      requestAnimationFrame(() => { wrap.style.transition = 'opacity .4s'; wrap.style.opacity = '1'; });
+    }
+
+    async function runOnce() {
+      msgsEl.innerHTML = '';
+      slide.classList.remove('step-2', 'step-3');
+      phaseEl.textContent = 'monorepo · pre-handoff';
+      for (const turn of TURN) {
+        await new Promise(r => setTimeout(r, turn.delay));
+        addMsg(turn);
+        if (turn.action) turn.action();
+      }
+      await new Promise(r => setTimeout(r, 4000));
+    }
+
+    (async () => { while (true) { await runOnce(); } })();
+  })();
+</script>
+
+</body>
+</html>

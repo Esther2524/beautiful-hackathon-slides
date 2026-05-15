@@ -6,10 +6,11 @@ A collection of workflow, patterns, and principles for building bold pitch decks
 
 ## What This Does
 
-- **Walks you through a proven 7-phase workflow** — from clarifying questions to final demo video integration
+- **Walks you through a proven 9-phase workflow** — from clarifying questions to final demo video integration
 - **Shows, doesn't tell** — generates 5 visually distinct style previews instead of asking "what font do you want?"
 - **Delivers single-file HTML decks** — zero dependencies, opens in any browser, responsive
 - **Reserves explicit slots for live demo recordings** — hackathon decks always need them
+- **Or builds an animated *fake live demo slide* for you** — when the product isn't built yet (or as polish over a screen recording). 6 archetypes to pick from — Split Narrative, Pipeline Walk, Before/After Morph, Dashboard Fill-In, Network Graph, Map Heatbloom. See ["What's new"](#whats-new--fake-live-demo-slide) below.
 - **Generates AI narration scripts** — matched to your video's time limit
 - **Stores context in markdown files** — so long iteration sessions don't lose alignment
 
@@ -75,16 +76,48 @@ beautiful-hackathon-slides/
 ├── LICENSE                               ← MIT
 ├── references/
 │   ├── ai-collaboration-principles.md    ← the three principles
-│   ├── workflow-phases.md                ← detailed 7-phase workflow
+│   ├── workflow-phases.md                ← detailed 9-phase workflow
 │   ├── style-presets.md                  ← 5 aesthetic archetypes
 │   ├── slide-patterns.md                 ← reusable slide pattern library
 │   ├── iteration-patterns.md             ← common adjustments lookup
-│   └── video-integration.md              ← recording + inserting demos
+│   ├── video-integration.md              ← recording + inserting demos
+│   └── live-demo-archetypes.md           ← 6 fake-live-demo archetypes + elicitation Qs
 └── assets/
     ├── plan-template.md                  ← PLAN.md template
     ├── narration-script-template.md      ← narration script template
-    └── style-preview-template.html       ← HTML scaffolding
+    ├── style-preview-template.html       ← HTML scaffolding
+    └── live-demo-template.html           ← 6-archetype scaffolds for fake live demos
 ```
+
+## What's New · Fake Live Demo Slide
+
+Most hackathon decks lean on a recorded screen video for the "demo" slide. That's fine — but two situations break it:
+
+- **Your product isn't built yet** (or backend's flaky and could crash on stage)
+- **A screen recording feels too "raw"** for the otherwise-designed deck
+
+Now Phase 1 asks **Q6**: *"Live demo plan? (a) embed your video, (b) Claude builds a fake-data animation, (c) skip."* If you pick (b), Phase 3 runs a short follow-up:
+
+1. Claude recommends 2–3 of the 6 archetypes for your specific product (with a one-line "why this one")
+2. You pick one
+3. Claude asks 3 elicitation questions (e.g., for *Pipeline Walk*: "what are your 3–6 stage names? what flows through them? what shows up at the end?")
+4. Claude generates the slide inline — same fonts/colors as the rest of your deck — with a 15–25 second loop and a final reveal beat
+
+The 6 archetypes:
+
+| Archetype | Best for |
+|---|---|
+| **Split Narrative** | conversational / agentic products (chat on left, visual on right, synced) |
+| **Pipeline Walk** | multi-stage data transformers (RAG, ETL, AI workflows) |
+| **Before / After Morph** | cleanup / refactor / migration products |
+| **Dashboard Fill-In** | analytics / monitoring / insights tools |
+| **Network Graph Grow** | knowledge graphs / multi-agent / social |
+| **Map Heatbloom** | logistics / geographic / global rollout |
+
+Full archetype docs and the 3-questions-each elicitation patterns: [`references/live-demo-archetypes.md`](references/live-demo-archetypes.md).
+Starter HTML scaffolds for all 6: [`assets/live-demo-template.html`](assets/live-demo-template.html) (open in browser to preview).
+
+---
 
 ## The 5 Style Presets
 

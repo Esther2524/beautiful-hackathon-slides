@@ -53,6 +53,12 @@ These are the ONLY things needed to generate Phase 2 previews. Ask all 5 togethe
 >
 > **Q5**: After watching your demo, what do you most want judges to walk away thinking?
 > *(e.g., "these people are technically strong" or "this really solves a pain point" or "wow that design is clean")*
+>
+> **Q6**: Live demo plan? Pick one:
+> *(a) I'll embed my own recorded video — Claude leaves a placeholder slide for it.*
+> *(b) Claude builds a fake-data animation showing how my product works — useful when the product isn't built yet, or as polish over a screen recording.*
+> *(c) Skip — no demo slide.*
+> *(rare: (d) both — animation as backup behind a toggle on the same slide.)*
 
 **How to use the answers**:
 - Q1: Time limit determines narration word budget in Phase 6.
@@ -60,6 +66,7 @@ These are the ONLY things needed to generate Phase 2 previews. Ask all 5 togethe
 - Q3: Audience level decides whether to include an architecture slide and how much technical depth to show.
 - Q4: Existing visual identity informs color choices in Phase 2 previews. No identity = full creative freedom.
 - Q5: The "impression" answer does NOT affect which style previews are shown (Phase 2 always shows all 5 presets). It affects Phase 3 — which slides get detailed treatment and which get simplified. Map the user's free-text answer to the closest category: technically impressive / beautifully designed / solves a real problem / creative and bold.
+- Q6: Determines whether Phase 3 inserts a video-placeholder slide (a/d), a fake-animation slide (b/d), neither (c). For (b) and (d), Phase 3 runs a short follow-up — see "Phase 3 step 5b" below — to pick an archetype and elicit the demo's content. The animation work happens in Phase 3, not now.
 
 ### Explicitly defer these to later phases (do NOT ask now)
 
@@ -71,6 +78,7 @@ These are the ONLY things needed to generate Phase 2 previews. Ask all 5 togethe
 | Detailed tech stack breakdown | Phase 3 (when building Architecture slide) — or pulled from Step 1 doc |
 | Problem / solution detail sentences | Phase 3 (pulled from Step 1 doc, or asked per-slide if needed) |
 | Awards / categories targeted | Not asked — doesn't affect HTML output. Focus on product, not meta-awards. |
+| Live-demo archetype + content (if Q6=b/d) | Phase 3 step 5b (right after the deck scaffold is built, in one focused follow-up) |
 
 ### Anti-patterns to avoid
 
@@ -137,7 +145,45 @@ If the user volunteers a color preference ("I want it pink!"), capture it but tr
 3. **Apply the chosen preset's fonts**: the exact `@import` URL and `:root { --font-* }` CSS block is inline in each preset's description in `style-presets.md`. Copy-paste verbatim into the scaffolding. Do NOT retype from memory (URL typos cause silent font-load failures), and do NOT leave the template's Fraunces+Outfit defaults unless the chosen preset is Warm Editorial.
 4. **Pick an emoji logo** (if the chosen style supports it — see "Emoji Logo Generation" in `slide-patterns.md`). Select one primary emoji that captures the project theme, and 2-3 supporting emojis for scene cards / feature icons. Avoid startup clichés (💡🚀⭐).
 5. **Ask for team info now** (deferred from Phase 1): "I'm about to add the Team slide — what are the team members' names? Any handles, aliases, or roles to include?" Keep this brief.
-6. **Ask about live demo recordings** (deferred from Phase 1): "Will there be live demo recordings inserted? If yes, what's being shown (console, web UI, device, animation)? I'll leave placeholder slots for them." This decides how many `video-placeholder` slides to include.
+
+6. **Handle the live-demo decision from Q6**:
+
+   **If Q6 = (a) — embedded video**: Ask one short follow-up: "What's the recorded demo showing — console session, web UI walkthrough, device interaction? I'll size the placeholder accordingly." Insert a single `video-placeholder` slide at the natural "How it works / Demo" position. Move on.
+
+   **If Q6 = (c) — skip**: Don't insert a demo slide. Move on.
+
+   **If Q6 = (b) or (d) — Claude-built fake animation**: Run **step 5b** below before continuing.
+
+**5b. Fake Live Demo Slide construction** (only if Q6 = b or d)
+
+Load `references/live-demo-archetypes.md` and use `assets/live-demo-template.html` as the scaffold. Then:
+
+1. **Recommend 2–3 archetypes** to the user, each with a one-line "why for your product" grounded in their Phase 1 answers and any docs they shared. Reference the decision tree at the bottom of `live-demo-archetypes.md`. Do NOT dump all 6 — that's analysis paralysis. Format the recommendations like:
+
+   > "Looking at your product, three archetypes fit:
+   > - **Split Narrative** — your product is a chat-like agent that does visible work; this archetype shows both sides.
+   > - **Pipeline Walk** — your 5-stage RAG flow maps cleanly to this.
+   > - **Before/After Morph** — if you want to emphasize the cleanup angle.
+   >
+   > Open `assets/live-demo-template.html` to see all three at full size if you want a visual reference. Which one?"
+
+2. **User picks one** (or asks for a different one — accept and use the building blocks at the bottom of `live-demo-archetypes.md` to compose).
+
+3. **Ask the 3 elicitation questions** for the chosen archetype — these are listed per-archetype in `live-demo-archetypes.md`. Ask all 3 in a single message; don't drag it out into 3 round-trips.
+
+4. **Auto-draft the slide HTML** using the matching template section from `live-demo-template.html`. Critical:
+   - Inherit `--font-display`, `--font-body`, `--font-mono` (if defined), and color variables from the deck's `:root` — do NOT redeclare them inside the demo slide.
+   - Apply the per-style coloring from the "Style preset coupling" table in `live-demo-archetypes.md` for the chosen preset.
+   - Replace every `/* DATA */` placeholder with the user's elicitation answers.
+   - Keep the animation duration in the 15–25 second range for the deck slide (the thumbnails in the template loop faster only for preview).
+   - Always include the final reveal beat — the slide must have a clear "this is the moment" ending.
+
+5. **Insert the slide** into the deck at the natural position (typically slide 5, 6, or 7 of 12 — between problem/solution and the architecture/team slides).
+
+6. **Open the deck** and tell the user: "Live demo slide is in. Open the deck and watch slide N. Check the stage labels, the punchline at the end, and the timing — let me know what to adjust." Don't loop on draft previews; iterate inline in Phase 5.
+
+After step 5b finishes (or if Q6 was a/c and step 5b was skipped), continue with step 7 of the main Phase 3 flow.
+
 7. **Apply the user's Impression choice** from Phase 1 to decide slide emphasis:
 
    | Impression | Emphasize (more detail, more time) | Simplify (lighter treatment) |
@@ -156,7 +202,7 @@ If the user volunteers a color preference ("I want it pink!"), capture it but tr
 10. In per-component CSS, use `var(--font-display)` / `var(--font-body)` — never hardcode font names like `font-family: 'Fraunces'`, or fonts won't swap when the preset changes.
 11. Aim for **10–14 slides** total. Default: 12.
 12. **Run the Font Sanity Check** from `style-presets.md` before handing off to the user. Verify: @import URL matches font-family declarations, weight 700+ is imported, italic variants are imported if used.
-12. Open the deck in the browser so the user can review.
+13. Open the deck in the browser so the user can review.
 
 **Output**: A complete HTML deck.
 
@@ -195,6 +241,7 @@ If the user volunteers a color preference ("I want it pink!"), capture it but tr
    - "Text overlapping with next column" → add `white-space: nowrap` or split columns
    - "Colors feel off" → update CSS variables
    - "This slide has too much text" → rewrite with shorter phrasing + visuals
+   - For fake-live-demo slide adjustments (timing, looping, label edits, archetype swap): see "Iterating on a fake demo slide" in `references/live-demo-archetypes.md`
 3. After each edit, remind the user to refresh the browser.
 4. **Update PLAN.md on "significant changes"**. Significant = any of these:
    - Slide added, removed, or reordered

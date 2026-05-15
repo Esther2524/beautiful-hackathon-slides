@@ -308,6 +308,40 @@ Keep the "this is deployed" badge appropriate to the context — e.g., "Live on 
 ```
 See `video-integration.md` for details.
 
+**Alternative — fake live demo**: If the user picked Q6 = (b) in Phase 1, this slide is replaced by a Fake Live Demo Slide (see pattern 7b below) instead of a placeholder.
+
+---
+
+### 7b. Fake Live Demo Slide (animated, no recording required)
+
+**When to use**: User picked Q6 = (b) or (d) in Phase 1 — Claude builds an animated fake-data demo slide showing how the product works, instead of (or alongside) an embedded recording.
+
+**Source of truth**: This pattern is fully documented in `references/live-demo-archetypes.md`, with 6 archetypes and their elicitation questions. The starter HTML lives in `assets/live-demo-template.html`.
+
+**Structure** (skeleton — fill via Phase 3 step 5b):
+```html
+<div class="slide slide-demo">
+  <div class="section-label"><span class="line"></span>Live Demo</div>
+  <h2>How {ProductName} works</h2>
+  <!-- Pick ONE archetype block below — copied from assets/live-demo-template.html -->
+  <section class="demo-slide demo-{ARCHETYPE} bg-grid"
+           style="width:80vw; max-width:1100px; margin:0 auto;">
+    <!-- archetype-specific content with /* DATA */ replaced by user's elicitation answers -->
+  </section>
+  <p class="demo-subtitle">A 20-second loop · final reveal at the end</p>
+</div>
+```
+
+Where `{ARCHETYPE}` is one of: `split` · `pipeline` · `morph` · `dash` · `network` · `map`.
+
+**Critical rules**:
+- The `<section class="demo-slide ...">` must inherit the deck's `:root` CSS variables for fonts and colors. Don't redeclare `--font-display` etc. inside the demo slide.
+- Apply per-style coloring from the "Style preset coupling" table in `live-demo-archetypes.md`.
+- Animation length 15–25s on the deck slide; always include a final reveal beat.
+- One archetype per slide. Don't combine.
+
+**When to use this instead of pattern 7**: Whenever the user has NO recorded video, OR wants the animation as the primary demo even with a video as backup.
+
 ---
 
 ### 8. Card Grid (6-Card Feature/Claim Showcase)
